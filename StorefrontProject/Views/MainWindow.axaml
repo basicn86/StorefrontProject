@@ -15,6 +15,17 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="70"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<Button Margin="20" HorizontalAlignment="Right" Grid.Row="0">View Cart ($0.00)</Button>
+
+		<ContentControl Grid.Row="1">
+			
+		</ContentControl>
+	</Grid>
 
 </Window>

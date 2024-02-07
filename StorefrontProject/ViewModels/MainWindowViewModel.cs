@@ -1,4 +1,6 @@
-﻿namespace StorefrontProject.ViewModels
+﻿using ReactiveUI;
+
+namespace StorefrontProject.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
