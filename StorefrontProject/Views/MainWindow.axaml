@@ -1,10 +1,10 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:StorefrontProject.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="StorefrontProject.Views.MainWindow"
+		xmlns:vm="using:StorefrontProject.ViewModels"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="StorefrontProject">
@@ -21,9 +21,13 @@
 			<RowDefinition Height="Auto"></RowDefinition>
 		</Grid.RowDefinitions>
 
-		<Button Margin="20" HorizontalAlignment="Right" Grid.Row="0">View Cart ($0.00)</Button>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Spacing="10" Margin="20">
+			<Button>Shop</Button>
+			<Button>Orders</Button>
+			<Button>View Cart ($0.00)</Button>
+		</StackPanel>
 
-		<ContentControl Grid.Row="1">
+		<ContentControl Grid.Row="1" Content="{Binding MainContent}">
 			
 		</ContentControl>
 	</Grid>
