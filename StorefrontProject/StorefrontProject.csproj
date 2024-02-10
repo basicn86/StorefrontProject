@@ -17,6 +17,15 @@
 		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <None Remove="Assets\apple.jpg" />
+	  <None Remove="Assets\banana.jpg" />
+	  <None Remove="Assets\carrot.jpg" />
+	  <None Remove="Assets\Durian.webp" />
+	  <None Remove="Assets\eggplant.webp" />
+	  <None Remove="Assets\figs.jpg" />
+	</ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.0.7" />
     <PackageReference Include="Avalonia.Desktop" Version="11.0.7" />
@@ -25,5 +34,11 @@
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.7" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\CatalogView.axaml.cs">
+      <DependentUpon>CatalogView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

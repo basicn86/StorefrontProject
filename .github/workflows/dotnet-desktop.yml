@@ -2,8 +2,11 @@ name: build
 
 on:
   push:
+    branches:
+      - master
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
 env:
   DOTNET_VERSION: '7.0.x' # The .NET SDK version to use
