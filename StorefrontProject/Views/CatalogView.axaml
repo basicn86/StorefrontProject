@@ -6,8 +6,8 @@
              x:Class="StorefrontProject.Views.CatalogView"
 			 xmlns:vm="using:StorefrontProject.ViewModels"
              x:DataType="vm:CatalogViewModel">
-	<ScrollViewer Height="600" AllowAutoHide="True">
-		<ItemsControl HorizontalAlignment="Center" ItemsSource="{Binding TestProducts}">
+	<ScrollViewer Height="650" AllowAutoHide="True">
+		<ItemsControl HorizontalAlignment="Center" ItemsSource="{Binding CatalogItems}">
 			<ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
 					<WrapPanel/>
@@ -16,11 +16,11 @@
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
 					<StackPanel Orientation="Vertical" Spacing="5">
-						<Image Source="{Binding}" Width="200" Height="200"></Image>
-						<TextBlock HorizontalAlignment="Center">Product</TextBlock>
-						<TextBlock HorizontalAlignment="Center">Price</TextBlock>
-						<NumericUpDown Width="150" Increment="1" Minimum="1" FormatString="0"/>
-						<Button HorizontalAlignment="Center">Add to Cart</Button>
+						<Image Source="{Binding ProductImage}" Width="200" Height="200"></Image>
+						<TextBlock HorizontalAlignment="Center" Text="{Binding Name}"></TextBlock>
+						<TextBlock HorizontalAlignment="Center" Text="{Binding Price}"></TextBlock>
+						<NumericUpDown Width="150" Increment="1" Minimum="1" Value="1" FormatString="0"/>
+						<Button HorizontalAlignment="Center" Command="{Binding AddToCartCommand}">Add to Cart</Button>
 					</StackPanel>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
