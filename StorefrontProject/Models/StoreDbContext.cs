@@ -82,9 +82,6 @@ namespace StorefrontProject.Models
             });
 
             SaveChanges();
-
-            //get the apple.jpg image from the Avalonia assets folder
-            AssetLoader.Open(new Uri("avares://StorefrontProject/Assets/apple.jpg"));
         }
 
         private byte[]? LoadProductImage(string name)
