@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using StorefrontProject.Models;
 
 namespace StorefrontProject.ViewModels
 {
