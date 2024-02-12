@@ -14,19 +14,26 @@ namespace StorefrontProject.ViewModels
     {
         public ObservableCollection<CatalogItemViewModel> CatalogItems { get; set; }
 
-        private StoreDbContext context = new StoreDbContext();
+        private StoreDbContext context;
         public CatalogViewModel()
         {
+            context = new StoreDbContext("store.db");
             CatalogItems = new ObservableCollection<CatalogItemViewModel>();
-            context.ResetDatabase();
 
-            foreach (var product in context.Products)
+#if DEBUG
+            context.ResetDatabase(); //reset database in debug config
+#endif
+
+            //This loop uses LINQ to get the first 10 products from the database and adds them to the CatalogItems collection.
+            foreach (var product in (from p in context.Products select p).Take(10))
             {
+                //if the image fails to load, skip it
                 if (product.ProductImage == null)
                 {
                     continue;
                 }
 
+                //Converts the byte array to a Bitmap and adds it to the CatalogItems collection.
                 using (MemoryStream ms = new MemoryStream(product.ProductImage))
                 {
                     CatalogItemViewModel item = new CatalogItemViewModel(product.Name, product.Price, new Bitmap(ms));
