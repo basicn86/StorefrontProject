@@ -17,9 +17,9 @@ namespace StorefrontProject.Models
         public DbSet<Product> Products { get; set; }
         private string dbPath;
 
-        public StoreDbContext()
+        public StoreDbContext(string dbName)
         {
-            dbPath = System.IO.Path.Join(Environment.CurrentDirectory, "store.db");
+            dbPath = System.IO.Path.Join(Environment.CurrentDirectory, dbName);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
