@@ -27,7 +27,7 @@ namespace StorefrontProject.ViewModels
             //This loop uses LINQ to get the first 10 products from the database and adds them to the CatalogItems collection.
             foreach (var product in (from p in context.Products select p).Take(10))
             {
-                //if the image fails to load, skip it
+                //if the image fails to load, do not load the product
                 if (product.ProductImage == null)
                 {
                     continue;
