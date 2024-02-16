@@ -13,7 +13,15 @@ namespace StorefrontProject.ViewModels
 
         public MainWindowViewModel()
         {
-            MainContent = new CatalogViewModel();
+            //if the application is running in debug configuration, set the main content to a new instance of the CatalogViewModel with DebugAPIService in the constructor
+            #if DEBUG
+            MainContent = new CatalogViewModel(new DebugAPIService());
+            #endif
+
+            //if the application is running in release configuration, set the main content to a new instance of the CatalogViewModel with APIService in the constructor
+            #if !DEBUG
+            MainContent = new CatalogViewModel(new APIService());
+            #endif
         }
     }
 }

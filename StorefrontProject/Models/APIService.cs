@@ -12,10 +12,8 @@ namespace StorefrontProject.Models
         //get products from the database
         public async Task<IEnumerable<Product>> GetProductsAsync()
         {
-            using (StoreDbContext context = new StoreDbContext("store.db"))
-            {
-                return await Task.Run(() => (from p in context.Products select p).Take(10));
-            }
+            //return empty ienumerable to avoid the error for now
+            return Enumerable.Empty<Product>();
         }
     }
 }
