@@ -28,7 +28,7 @@ namespace StorefrontProject.ViewModels
         private async Task LoadProductsAsync()
         {
             //list of products
-            IEnumerable<Product> products = await apiService.GetProductsAsync();
+            IEnumerable<NetworkResources.Product> products = await apiService.GetProductsAsync();
 
             foreach (var product in products)
             {

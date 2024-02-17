@@ -9,16 +9,16 @@ namespace StorefrontProject.Models
 {
     public class DebugAPIService : IAPIService
     {
-        public async Task<IEnumerable<Product>> GetProductsAsync()
+        public async Task<IEnumerable<NetworkResources.Product>> GetProductsAsync()
         {
             //fake await for 1 seconds
             await Task.Delay(1000);
 
             //generate a list of fake products for now
-            List<Product> products = new List<Product>();
-            products.Add(new Product { Name = "Product 1", Price = 10.00m });
-            products.Add(new Product { Name = "Product 2", Price = 20.00m });
-            products.Add(new Product { Name = "Product 3", Price = 30.00m });
+            List<NetworkResources.Product> products = new List<NetworkResources.Product>();
+            products.Add(new NetworkResources.Product { Name = "Product 1", Price = 10.00m });
+            products.Add(new NetworkResources.Product { Name = "Product 2", Price = 20.00m });
+            products.Add(new NetworkResources.Product { Name = "Product 3", Price = 30.00m });
 
             //return the list of products for debugging
             return products.AsEnumerable();

@@ -8,6 +8,6 @@ namespace StorefrontProject.Models.Interfaces
 {
     public interface IAPIService
     {
-        public Task<IEnumerable<Product>> GetProductsAsync();
+        public Task<IEnumerable<NetworkResources.Product>> GetProductsAsync();
     }
 }

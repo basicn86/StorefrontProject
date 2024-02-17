@@ -5,7 +5,9 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StorefrontProject", "StorefrontProject\StorefrontProject.csproj", "{90D65FA2-E554-4EF6-87BF-59A4A44B167B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorefrontAPI", "StorefrontAPI\StorefrontAPI.csproj", "{9CA5A72F-A84B-4D1B-B035-58C776F1DA90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StorefrontAPI", "StorefrontAPI\StorefrontAPI.csproj", "{9CA5A72F-A84B-4D1B-B035-58C776F1DA90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkResources", "NetworkResources\NetworkResources.csproj", "{B00A406F-2E87-4CA4-88C2-30B85A9B6C75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9CA5A72F-A84B-4D1B-B035-58C776F1DA90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CA5A72F-A84B-4D1B-B035-58C776F1DA90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CA5A72F-A84B-4D1B-B035-58C776F1DA90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B00A406F-2E87-4CA4-88C2-30B85A9B6C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B00A406F-2E87-4CA4-88C2-30B85A9B6C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B00A406F-2E87-4CA4-88C2-30B85A9B6C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B00A406F-2E87-4CA4-88C2-30B85A9B6C75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

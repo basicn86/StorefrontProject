@@ -14,7 +14,7 @@ namespace StorefrontProject.Models
         private const string API_URL = "http://localhost:5000/";
 
         //get products from the database
-        public async Task<IEnumerable<Product>> GetProductsAsync()
+        public async Task<IEnumerable<NetworkResources.Product>> GetProductsAsync()
         {
             HttpClient client = new HttpClient();
 
@@ -25,12 +25,12 @@ namespace StorefrontProject.Models
             //if the response is successful
             if (responseMessage.IsSuccessStatusCode)
             {
-                IEnumerable<Product> products = await responseMessage.Content.ReadAsAsync<IEnumerable<Product>>();
+                IEnumerable<NetworkResources.Product> products = await responseMessage.Content.ReadAsAsync<IEnumerable<NetworkResources.Product>>();
                 return products;
             }
 
             //return empty ienumerable to avoid the error for now
-            return Enumerable.Empty<Product>();
+            return Enumerable.Empty<NetworkResources.Product>();
         }
     }
 }
