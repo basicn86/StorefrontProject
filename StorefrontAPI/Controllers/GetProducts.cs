@@ -16,8 +16,8 @@ namespace StorefrontAPI.Controllers
 
             //add three fake products
             products.Add(new NetworkResources.Product { Id = 1, Name = "Walnuts", Price = 50.00m });
-            products.Add(new NetworkResources.Product { Id = 2, Name = "Product 2", Price = 20.00m });
-            products.Add(new NetworkResources.Product { Id = 3, Name = "Product 3", Price = 30.00m });
+            products.Add(new NetworkResources.Product { Id = 2, Name = "Pineapples", Price = 20.00m });
+            products.Add(new NetworkResources.Product { Id = 3, Name = "Coconuts", Price = 30.00m });
 
             //return the list of products in a JSON response
             return Ok(products);
