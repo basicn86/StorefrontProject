@@ -27,9 +27,10 @@ namespace StorefrontProject.ViewModels
 
         private async Task LoadProductsAsync()
         {
-            //list of products
+            //Get the list of products from the API
             IEnumerable<NetworkResources.Product> products = await apiService.GetProductsAsync();
 
+            //add the products to the catalog items
             foreach (var product in products)
             {
                 CatalogItems.Add(new CatalogItemViewModel(product.Name, product.Price, null));

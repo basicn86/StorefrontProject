@@ -20,13 +20,21 @@ namespace StorefrontProject.Models
 
             client.Timeout = TimeSpan.FromSeconds(15);
 
+            //try to get the products from the API
             HttpResponseMessage responseMessage = await client.GetAsync(API_URL + "api/GetProducts");
 
             //if the response is successful
             if (responseMessage.IsSuccessStatusCode)
             {
-                IEnumerable<NetworkResources.Product> products = await responseMessage.Content.ReadAsAsync<IEnumerable<NetworkResources.Product>>();
-                return products;
+                //try to read the response as a list of products
+                try
+                {
+                    IEnumerable<NetworkResources.Product> products = await responseMessage.Content.ReadAsAsync<IEnumerable<NetworkResources.Product>>();
+                    return products;
+                } catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
 
             //return empty ienumerable to avoid the error for now
