@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Media.Imaging;
 using StorefrontProject.Models;
+using StorefrontProject.Models.Interfaces;
 
 namespace StorefrontProject.ViewModels
 {
@@ -14,31 +15,24 @@ namespace StorefrontProject.ViewModels
     {
         public ObservableCollection<CatalogItemViewModel> CatalogItems { get; set; }
 
-        private StoreDbContext context;
-        public CatalogViewModel()
+        private IAPIService apiService;
+        public CatalogViewModel(IAPIService _apiService)
         {
-            context = new StoreDbContext("store.db");
             CatalogItems = new ObservableCollection<CatalogItemViewModel>();
+            apiService = _apiService;
 
-#if DEBUG
-            context.ResetDatabase(); //reset database in debug config
-#endif
+            //load the products and do not await for it
+            LoadProductsAsync();
+        }
 
-            //This loop uses LINQ to get the first 10 products from the database and adds them to the CatalogItems collection.
-            foreach (var product in (from p in context.Products select p).Take(10))
+        private async Task LoadProductsAsync()
+        {
+            //list of products
+            IEnumerable<NetworkResources.Product> products = await apiService.GetProductsAsync();
+
+            foreach (var product in products)
             {
-                //if the image fails to load, do not load the product
-                if (product.ProductImage == null)
-                {
-                    continue;
-                }
-
-                //Converts the byte array to a Bitmap and adds it to the CatalogItems collection.
-                using (MemoryStream ms = new MemoryStream(product.ProductImage))
-                {
-                    CatalogItemViewModel item = new CatalogItemViewModel(product.Name, product.Price, new Bitmap(ms));
-                    CatalogItems.Add(item);
-                }
+                CatalogItems.Add(new CatalogItemViewModel(product.Name, product.Price, null));
             }
         }
     }
