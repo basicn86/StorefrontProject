@@ -11,9 +11,6 @@ namespace StorefrontProject.Models
     {
         public async Task<IEnumerable<NetworkResources.Product>> GetProductsAsync()
         {
-            //fake await for 1 seconds
-            await Task.Delay(1000);
-
             //generate a list of fake products for now
             List<NetworkResources.Product> products = new List<NetworkResources.Product>();
             products.Add(new NetworkResources.Product { Name = "Product 1", Price = 10.00m });
