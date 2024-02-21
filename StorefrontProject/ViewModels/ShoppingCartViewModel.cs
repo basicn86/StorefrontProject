@@ -38,13 +38,19 @@ namespace StorefrontProject.ViewModels
                 {
                     Name = item.Key.Name,
                     Price = item.Key.Price,
-                    Quantity = item.Value,
+                    Quantity = item.Value
                 };
 
                 i.RemoveItemCommand = ReactiveCommand.Create(() =>
                 {
                     shoppingCart.RemoveItem(item.Key);
                     ShoppingCartItems.Remove(i);
+                    UpdateCartCommand.Execute().Subscribe();
+                });
+
+                i.UpdateCartCommand = ReactiveCommand.Create(() =>
+                {
+                    shoppingCart.UpdateQuantity(item.Key, (uint)i.Quantity);
                     UpdateCartCommand.Execute().Subscribe();
                 });
 

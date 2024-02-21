@@ -34,16 +34,31 @@ namespace StorefrontProject.ViewModels
             set { }
         }
 
-        private uint quantity;
-        public uint Quantity
+        private uint? quantity;
+        public uint? Quantity
         {
             get => quantity;
-            set => this.RaiseAndSetIfChanged(ref quantity, value);
+            set
+            {
+                if(value == null)
+                {
+                    quantity = 1;
+                    this.RaisePropertyChanged(nameof(Quantity));
+                }
+                else
+                {
+                    this.RaiseAndSetIfChanged(ref quantity, value);
+                }
+                UpdateCartCommand?.Execute().Subscribe();
+            }
         }
 
         //Remove item from cart command
-        public ReactiveCommand<Unit, Unit> RemoveItemCommand { get; set; }
+        public ReactiveCommand<Unit, Unit>? RemoveItemCommand { get; set; }
+        
+        //Update cart when quantity changes
+        public ReactiveCommand<Unit, Unit>? UpdateCartCommand { get; set; }
 
-        public decimal Total => price * Quantity;
+        public decimal Total => price * ((decimal?)quantity ?? 0);
     }
 }

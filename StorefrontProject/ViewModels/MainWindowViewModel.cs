@@ -28,9 +28,21 @@ namespace StorefrontProject.ViewModels
         //Shop Menu Command
         public ReactiveCommand<Unit, Unit> ShopMenuCommand { get; set; }
 
+        IShoppingCart shoppingCart;
 
         public MainWindowViewModel()
         {
+            //if debug mode is enabled, use the DebugShoppingCart
+#if DEBUG
+            shoppingCart = new DebugShoppingCart();
+            MainContent = new CatalogViewModel(new DebugAPIService());
+#else
+            shoppingCart = new ShoppingCart();
+            MainContent = new CatalogViewModel(new APIService());
+#endif
+            //Update the shopping cart button text
+            UpdateShoppingCartBtnText();
+
             //When clicking Shop menu, open the CatalogViewModel
             ShopMenuCommand = ReactiveCommand.Create(() =>
             {
@@ -45,20 +57,28 @@ namespace StorefrontProject.ViewModels
             //When opening the shopping cart, open the ShoppingCartViewModel
             ShoppingCartBtnCommand = ReactiveCommand.Create(() =>
             {
-                //ifif debug mode is enabled, use the DebugShoppingCart
-                #if DEBUG
-                MainContent = new ShoppingCartViewModel(new DebugShoppingCart(), ReactiveCommand.Create(() => { }));
-                #else
-                MainContent = new ShoppingCartViewModel(new ShoppingCart(), ReactiveCommand.Create(() => { }));
-                #endif
+                MainContent = new ShoppingCartViewModel(shoppingCart, ReactiveCommand.Create(() => { UpdateShoppingCartBtnText(); }));
             });
+        }
 
-            //default view is the CatalogViewModel
-#if DEBUG
-            MainContent = new CatalogViewModel(new DebugAPIService());
-#else
-            MainContent = new CatalogViewModel(new APIService());
-#endif
+        //Update shopping cart button text
+        public void UpdateShoppingCartBtnText()
+        {
+            //get the items in the shopping cart
+            var items = shoppingCart.GetItems();
+
+            uint TotalItems = 0;
+            decimal TotalPrice = 0;
+
+            //for each item in the shopping cart, add the quantity to the total items
+            foreach (var item in items)
+            {
+                TotalPrice += item.Key.Price * item.Value;
+                TotalItems += item.Value;
+            }
+
+            //set the shopping cart button text to "Shopping Cart $price (TotalItems)"
+            ShoppingCartBtnText = $"Shopping Cart {TotalPrice:C} ({TotalItems})";
         }
     }
 }

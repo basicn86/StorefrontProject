@@ -17,7 +17,7 @@
 						<!--Item Price-->
 						<TextBlock VerticalAlignment="Center" Text="{Binding PriceString}" Width="100"></TextBlock>
 						<!--Numeric scroller for quantity-->
-						<NumericUpDown VerticalAlignment="Center" Value="{Binding Quantity}" Width="150" Increment="1" Minimum="1" FormatString="0"/>
+						<NumericUpDown VerticalAlignment="Center" Value="{Binding Quantity}" Width="150" Increment="1" Maximum="99" Minimum="1" FormatString="0"/>
 						<!--Remove from cart button-->
 						<Button VerticalAlignment="Center" Command="{Binding RemoveItemCommand}">Remove from Cart</Button>
 					</StackPanel>
