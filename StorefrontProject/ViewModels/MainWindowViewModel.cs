@@ -52,6 +52,13 @@ namespace StorefrontProject.ViewModels
                 MainContent = new ShoppingCartViewModel(new ShoppingCart(), ReactiveCommand.Create(() => { }));
                 #endif
             });
+
+            //default view is the CatalogViewModel
+#if DEBUG
+            MainContent = new CatalogViewModel(new DebugAPIService());
+#else
+            MainContent = new CatalogViewModel(new APIService());
+#endif
         }
     }
 }
