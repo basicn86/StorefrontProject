@@ -18,16 +18,14 @@ namespace StorefrontProject.ViewModels
         public ObservableCollection<CatalogItemViewModel> CatalogItems { get; set; }
 
         private IAPIService apiService;
-        private IShoppingCart shoppingCart;
         
         //public shopping cart command
         public ReactiveCommand<Unit, Unit>? UpdateShoppingCart { get; set; }
 
-        public CatalogViewModel(IAPIService _apiService, IShoppingCart shoppingCart)
+        public CatalogViewModel(IAPIService _apiService)
         {
             CatalogItems = new ObservableCollection<CatalogItemViewModel>();
             apiService = _apiService;
-            this.shoppingCart = shoppingCart;
 
             //load the products and do not await for it
             LoadProductsAsync();
@@ -45,7 +43,7 @@ namespace StorefrontProject.ViewModels
 
                 catalogItem.AddToCartCommand = ReactiveCommand.Create(() =>
                 {
-                    shoppingCart.AddItem(product, catalogItem.Quantity);
+                    ShoppingCartService.Instance?.AddItem(product, catalogItem.Quantity);
                     UpdateShoppingCart?.Execute().Subscribe();
                 });
 

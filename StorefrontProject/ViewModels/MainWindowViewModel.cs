@@ -33,12 +33,14 @@ namespace StorefrontProject.ViewModels
         public MainWindowViewModel()
         {
             //if debug mode is enabled, use the DebugShoppingCart
+            ShoppingCartService.Instance = new ShoppingCart();
+
 #if DEBUG
             shoppingCart = new DebugShoppingCart();
             MainContent = new CatalogViewModel(new DebugAPIService());
 #else
             shoppingCart = new ShoppingCart();
-            MainContent = new CatalogViewModel(new APIService(), shoppingCart);
+            MainContent = new CatalogViewModel(new APIService());
 #endif
             //Update the shopping cart button text
             UpdateShoppingCartBtnText();
@@ -50,14 +52,14 @@ namespace StorefrontProject.ViewModels
 #if DEBUG
                 MainContent = new CatalogViewModel(new DebugAPIService());
 #else
-                MainContent = new CatalogViewModel(new APIService(), shoppingCart);
+                MainContent = new CatalogViewModel(new APIService());
 #endif
             });
 
             //When opening the shopping cart, open the ShoppingCartViewModel
             ShoppingCartBtnCommand = ReactiveCommand.Create(() =>
             {
-                MainContent = new ShoppingCartViewModel(shoppingCart, ReactiveCommand.Create(() => { UpdateShoppingCartBtnText(); }));
+                MainContent = new ShoppingCartViewModel(ReactiveCommand.Create(() => { UpdateShoppingCartBtnText(); }));
             });
         }
 
