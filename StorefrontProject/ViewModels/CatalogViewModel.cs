@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Media.Imaging;
+using ReactiveUI;
 using StorefrontProject.Models;
 using StorefrontProject.Models.Interfaces;
 
@@ -16,10 +18,16 @@ namespace StorefrontProject.ViewModels
         public ObservableCollection<CatalogItemViewModel> CatalogItems { get; set; }
 
         private IAPIService apiService;
-        public CatalogViewModel(IAPIService _apiService)
+        private IShoppingCart shoppingCart;
+        
+        //public shopping cart command
+        public ReactiveCommand<Unit, Unit>? UpdateShoppingCart { get; set; }
+
+        public CatalogViewModel(IAPIService _apiService, IShoppingCart shoppingCart)
         {
             CatalogItems = new ObservableCollection<CatalogItemViewModel>();
             apiService = _apiService;
+            this.shoppingCart = shoppingCart;
 
             //load the products and do not await for it
             LoadProductsAsync();
@@ -33,7 +41,15 @@ namespace StorefrontProject.ViewModels
             //add the products to the catalog items
             foreach (var product in products)
             {
-                CatalogItems.Add(new CatalogItemViewModel(product.Name, product.Price, null));
+                CatalogItemViewModel catalogItem = new CatalogItemViewModel(product.Name, product.Price, null);
+
+                catalogItem.AddToCartCommand = ReactiveCommand.Create(() =>
+                {
+                    shoppingCart.AddItem(product, catalogItem.Quantity);
+                    UpdateShoppingCart?.Execute().Subscribe();
+                });
+
+                CatalogItems.Add(catalogItem);
             }
         }
     }

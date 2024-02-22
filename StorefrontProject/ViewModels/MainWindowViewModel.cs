@@ -38,7 +38,7 @@ namespace StorefrontProject.ViewModels
             MainContent = new CatalogViewModel(new DebugAPIService());
 #else
             shoppingCart = new ShoppingCart();
-            MainContent = new CatalogViewModel(new APIService());
+            MainContent = new CatalogViewModel(new APIService(), shoppingCart);
 #endif
             //Update the shopping cart button text
             UpdateShoppingCartBtnText();
@@ -50,7 +50,7 @@ namespace StorefrontProject.ViewModels
 #if DEBUG
                 MainContent = new CatalogViewModel(new DebugAPIService());
 #else
-                MainContent = new CatalogViewModel(new APIService());
+                MainContent = new CatalogViewModel(new APIService(), shoppingCart);
 #endif
             });
 
