@@ -1,6 +1,7 @@
 ﻿using ReactiveUI;
 using StorefrontProject.Models;
 using StorefrontProject.Models.Interfaces;
+using System.Collections.Generic;
 using System.Reactive;
 
 namespace StorefrontProject.ViewModels
@@ -28,8 +29,6 @@ namespace StorefrontProject.ViewModels
         //Shop Menu Command
         public ReactiveCommand<Unit, Unit> ShopMenuCommand { get; set; }
 
-        IShoppingCart shoppingCart;
-
         public MainWindowViewModel()
         {
             //if debug mode is enabled, use the DebugShoppingCart
@@ -40,8 +39,8 @@ namespace StorefrontProject.ViewModels
             shoppingCart = new DebugShoppingCart();
             MainContent = new CatalogViewModel(new DebugAPIService());
 #else
-            shoppingCart = new ShoppingCart();
-            MainContent = new CatalogViewModel();
+            ShoppingCartService.Instance = new ShoppingCart();
+            MainContent = new CatalogViewModel(ReactiveCommand.Create(() => { UpdateShoppingCartBtnText(); }));
 #endif
             //Update the shopping cart button text
             UpdateShoppingCartBtnText();
@@ -51,7 +50,7 @@ namespace StorefrontProject.ViewModels
             {
                 //avoid reloading the catalog if it's already open
                 if (MainContent is CatalogViewModel) return;
-                MainContent = new CatalogViewModel();
+                MainContent = new CatalogViewModel(ReactiveCommand.Create(() => { UpdateShoppingCartBtnText(); }));
             });
 
             //When opening the shopping cart, open the ShoppingCartViewModel
@@ -67,7 +66,7 @@ namespace StorefrontProject.ViewModels
         public void UpdateShoppingCartBtnText()
         {
             //get the items in the shopping cart
-            var items = shoppingCart.GetItems();
+            Dictionary<NetworkResources.Product, uint> items = ShoppingCartService.Instance.GetItems();
 
             uint TotalItems = 0;
             decimal TotalPrice = 0;

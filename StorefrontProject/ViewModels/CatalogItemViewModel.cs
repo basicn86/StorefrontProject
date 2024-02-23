@@ -6,18 +6,29 @@ using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Media.Imaging;
 using ReactiveUI;
+using StorefrontProject.Models;
 using StorefrontProject.Models.Interfaces;
 
 namespace StorefrontProject.ViewModels
 {
     public class CatalogItemViewModel : ViewModelBase
     {
-        public CatalogItemViewModel(string name, decimal price, Bitmap? productImage)
+        public CatalogItemViewModel(string name, decimal price, Bitmap? productImage, ReactiveCommand<Unit, Unit> notifyCartUpdate, NetworkResources.Product product)
         {
             Name = name;
             Price = price;
             ProductImage = productImage;
+            Quantity = 1;
+            this.Product = product;
+
+            AddToCartCommand = ReactiveCommand.Create(() =>
+            {
+                ShoppingCartService.Instance?.AddItem(Product, Quantity);
+                notifyCartUpdate.Execute().Subscribe();
+            });
         }
+        //product
+        public NetworkResources.Product Product { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public Bitmap? ProductImage { get; set; }

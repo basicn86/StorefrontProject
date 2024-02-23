@@ -20,9 +20,10 @@ namespace StorefrontProject.ViewModels
         //public shopping cart command
         public ReactiveCommand<Unit, Unit>? UpdateShoppingCart { get; set; }
 
-        public CatalogViewModel()
+        public CatalogViewModel(ReactiveCommand<Unit, Unit> updateShoppingCart)
         {
             CatalogItems = new ObservableCollection<CatalogItemViewModel>();
+            UpdateShoppingCart = updateShoppingCart;
 
             //load the products and do not await for it
             _ = LoadProductsAsync();
@@ -39,13 +40,7 @@ namespace StorefrontProject.ViewModels
             //add the products to the catalog items
             foreach (var product in products)
             {
-                CatalogItemViewModel catalogItem = new CatalogItemViewModel(product.Name, product.Price, null);
-
-                catalogItem.AddToCartCommand = ReactiveCommand.Create(() =>
-                {
-                    ShoppingCartService.Instance?.AddItem(product, catalogItem.Quantity);
-                    UpdateShoppingCart?.Execute().Subscribe();
-                });
+                CatalogItemViewModel catalogItem = new CatalogItemViewModel(product.Name, product.Price, null, UpdateShoppingCart, product);
 
                 CatalogItems.Add(catalogItem);
             }
