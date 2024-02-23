@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StorefrontProject.Models.Interfaces
 {
-    public interface IAPIService
+    public interface IApiClient
     {
         public Task<IEnumerable<NetworkResources.Product>> GetProductsAsync();
     }

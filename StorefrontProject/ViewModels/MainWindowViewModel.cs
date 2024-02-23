@@ -34,13 +34,14 @@ namespace StorefrontProject.ViewModels
         {
             //if debug mode is enabled, use the DebugShoppingCart
             ShoppingCartService.Instance = new ShoppingCart();
+            ApiService.Instance = new ApiClient();
 
 #if DEBUG
             shoppingCart = new DebugShoppingCart();
             MainContent = new CatalogViewModel(new DebugAPIService());
 #else
             shoppingCart = new ShoppingCart();
-            MainContent = new CatalogViewModel(new APIService());
+            MainContent = new CatalogViewModel();
 #endif
             //Update the shopping cart button text
             UpdateShoppingCartBtnText();
@@ -48,17 +49,16 @@ namespace StorefrontProject.ViewModels
             //When clicking Shop menu, open the CatalogViewModel
             ShopMenuCommand = ReactiveCommand.Create(() =>
             {
-                //if debug mode is enabled, use the DebugAPIService
-#if DEBUG
-                MainContent = new CatalogViewModel(new DebugAPIService());
-#else
-                MainContent = new CatalogViewModel(new APIService());
-#endif
+                //avoid reloading the catalog if it's already open
+                if (MainContent is CatalogViewModel) return;
+                MainContent = new CatalogViewModel();
             });
 
             //When opening the shopping cart, open the ShoppingCartViewModel
             ShoppingCartBtnCommand = ReactiveCommand.Create(() =>
             {
+                //avoid reloading the shopping cart if it's already open
+                if (MainContent is ShoppingCartViewModel) return;
                 MainContent = new ShoppingCartViewModel(ReactiveCommand.Create(() => { UpdateShoppingCartBtnText(); }));
             });
         }

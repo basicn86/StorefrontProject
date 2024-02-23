@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StorefrontProject.Models
 {
-    public class DebugAPIService : IAPIService
+    public class DebugApiClient : IApiClient
     {
         public async Task<IEnumerable<NetworkResources.Product>> GetProductsAsync()
         {
