@@ -44,8 +44,22 @@ namespace StorefrontProject.Models
         //placeholder for placing an order
         public async Task PlaceOrderAsync(NetworkResources.OrderRequest orderRequest)
         {
-            //wait for 2 seconds to simulate the order being placed
-            await Task.Delay(2000);
+            //new HTTP client
+            HttpClient client = new HttpClient();
+
+            //client timeout
+            client.Timeout = TimeSpan.FromSeconds(15);
+
+            //http response
+            HttpResponseMessage responseMessage = await client.PostAsJsonAsync(API_URL + "api/PlaceOrder", orderRequest);
+
+            //if the response is not successful
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                throw new Exception("Failed to place order");
+            }
+
+            //return nothing
         }
     }
 }

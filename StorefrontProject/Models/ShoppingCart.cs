@@ -79,8 +79,14 @@ namespace StorefrontProject.Models
                 TotalPrice = TotalPrice
             };
 
-            //send the order request to the API
-            await ApiService.Instance?.PlaceOrderAsync(orderRequest);
+            //try to place the order
+            try
+            {
+                await ApiService.Instance.PlaceOrderAsync(orderRequest);
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
             //clear the cart
             items.Clear();
