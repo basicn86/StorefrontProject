@@ -65,6 +65,9 @@ namespace StorefrontProject.ViewModels
         //Update shopping cart button text
         public void UpdateShoppingCartBtnText()
         {
+            //verify if the shopping cart service is null
+            if (ShoppingCartService.Instance == null) return;
+
             //get the items in the shopping cart
             Dictionary<NetworkResources.Product, uint> items = ShoppingCartService.Instance.GetItems();
 
