@@ -16,10 +16,17 @@ namespace StorefrontProject.ViewModels
         //observable collection of ShoppingCartItemViewModel
         public ObservableCollection<ShoppingCartItemViewModel> ShoppingCartItems { get; set; }
 
-        private ReactiveCommand<Unit, Unit> UpdateCartCommand { get; }
+        private ReactiveCommand<Unit, Unit>? UpdateCartCommand { get; }
+
+        //Checkout button command
+        public ReactiveCommand<Unit, Unit>? CheckoutCommand { get; }
+        //Clear cart button command
+        public ReactiveCommand<Unit, Unit>? ClearCartCommand { get; }
 
         public ShoppingCartViewModel(ReactiveCommand<Unit, Unit> updateCartCommand)
         {
+            if (ShoppingCartService.Instance == null) return;
+
             ShoppingCartItems = new ObservableCollection<ShoppingCartItemViewModel>();
 
             //set the update cart command
@@ -33,6 +40,15 @@ namespace StorefrontProject.ViewModels
             {
                 return;
             }
+
+            //create the CheckoutCommand
+            CheckoutCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                await ShoppingCartService.Instance?.Checkout();
+                UpdateCartCommand.Execute().Subscribe();
+                //clear the ShoppingCartItems collection
+                ShoppingCartItems.Clear();
+            });
 
             //for each item in the shopping cart, add a new ShoppingCartItemViewModel to the ShoppingCartItems collection
             foreach (var item in items)

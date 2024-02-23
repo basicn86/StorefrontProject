@@ -50,5 +50,11 @@ namespace StorefrontProject.Models
         {
             items[product] = quantity;
         }
+        
+        //fake order placement
+        public async Task Checkout()
+        {
+            await Task.Delay(1000);
+        }
     }
 }

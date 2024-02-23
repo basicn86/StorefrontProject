@@ -40,5 +40,12 @@ namespace StorefrontProject.Models
             //return empty ienumerable to avoid the error for now
             return Enumerable.Empty<NetworkResources.Product>();
         }
+
+        //placeholder for placing an order
+        public async Task PlaceOrderAsync(NetworkResources.OrderRequest orderRequest)
+        {
+            //wait for 2 seconds to simulate the order being placed
+            await Task.Delay(2000);
+        }
     }
 }

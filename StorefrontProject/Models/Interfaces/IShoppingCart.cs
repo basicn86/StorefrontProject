@@ -22,5 +22,8 @@ namespace StorefrontProject.Models.Interfaces
 
         //clear the shopping cart
         public void Clear();
+
+        //checkout the shopping cart
+        public Task Checkout();
     }
 }

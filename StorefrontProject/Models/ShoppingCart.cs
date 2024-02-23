@@ -53,5 +53,37 @@ namespace StorefrontProject.Models
         {
             items.Clear();
         }
+
+        //checkout the shopping cart
+        public async Task Checkout()
+        {
+            //if the cart is empty, return
+            if (items.Count == 0) return;
+            //if the API is null, return
+            if (ApiService.Instance == null) return;
+
+            //convert the dictionary to a dictionary of product IDs to quantities to be interpretable by the API
+            Dictionary<int, int> orderItems = new Dictionary<int, int>();
+            decimal TotalPrice = 0;
+
+            foreach (var item in items)
+            {
+                orderItems.Add(item.Key.Id, (int)item.Value);
+                TotalPrice += item.Key.Price * item.Value;
+            }
+
+            //create a new OrderRequest
+            NetworkResources.OrderRequest orderRequest = new NetworkResources.OrderRequest
+            {
+                OrderItems = orderItems,
+                TotalPrice = TotalPrice
+            };
+
+            //send the order request to the API
+            await ApiService.Instance?.PlaceOrderAsync(orderRequest);
+
+            //clear the cart
+            items.Clear();
+        }
     }
 }

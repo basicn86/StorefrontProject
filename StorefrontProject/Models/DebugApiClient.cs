@@ -20,5 +20,12 @@ namespace StorefrontProject.Models
             //return the list of products for debugging
             return products.AsEnumerable();
         }
+
+        //implement place order
+        public async Task PlaceOrderAsync(NetworkResources.OrderRequest orderRequest)
+        {
+            //fake order placement
+            await Task.Delay(1000);
+        }
     }
 }
