@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Media.Imaging;
+using ReactiveUI;
 using StorefrontProject.Models;
 using StorefrontProject.Models.Interfaces;
 
@@ -14,26 +16,33 @@ namespace StorefrontProject.ViewModels
     public class CatalogViewModel : ViewModelBase
     {
         public ObservableCollection<CatalogItemViewModel> CatalogItems { get; set; }
+        
+        //public shopping cart command
+        public ReactiveCommand<Unit, Unit>? UpdateShoppingCart { get; set; }
 
-        private IAPIService apiService;
-        public CatalogViewModel(IAPIService _apiService)
+        public CatalogViewModel(ReactiveCommand<Unit, Unit> updateShoppingCart)
         {
             CatalogItems = new ObservableCollection<CatalogItemViewModel>();
-            apiService = _apiService;
+            UpdateShoppingCart = updateShoppingCart;
 
             //load the products and do not await for it
-            LoadProductsAsync();
+            _ = LoadProductsAsync();
         }
 
         private async Task LoadProductsAsync()
         {
+            //if API service is null, return
+            if (ApiService.Instance == null) return;
+
             //Get the list of products from the API
-            IEnumerable<NetworkResources.Product> products = await apiService.GetProductsAsync();
+            IEnumerable<NetworkResources.Product> products = await ApiService.Instance.GetProductsAsync();
 
             //add the products to the catalog items
             foreach (var product in products)
             {
-                CatalogItems.Add(new CatalogItemViewModel(product.Name, product.Price, null));
+                CatalogItemViewModel catalogItem = new CatalogItemViewModel(product.Name, product.Price, null, UpdateShoppingCart, product);
+
+                CatalogItems.Add(catalogItem);
             }
         }
     }

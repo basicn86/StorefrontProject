@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace StorefrontProject.Models
 {
-    public static class ApiService
+    public static class ShoppingCartService
     {
-        //instance of api client
-        public static IApiClient? Instance;
+        public static IShoppingCart? Instance;
     }
 }

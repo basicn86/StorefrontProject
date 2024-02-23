@@ -50,5 +50,8 @@
     <Compile Update="Views\CatalogView.axaml.cs">
       <DependentUpon>CatalogView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\ShoppingCartView.axaml.cs">
+      <DependentUpon>ShoppingCartView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

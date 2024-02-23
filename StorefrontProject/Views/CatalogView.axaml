@@ -19,7 +19,7 @@
 						<Image Source="{Binding ProductImage}" Width="200" Height="200"></Image>
 						<TextBlock HorizontalAlignment="Center" Text="{Binding Name}"></TextBlock>
 						<TextBlock HorizontalAlignment="Center" Text="{Binding Price}"></TextBlock>
-						<NumericUpDown Width="150" Increment="1" Minimum="1" Value="1" FormatString="0"/>
+						<NumericUpDown Width="150" Increment="1" Minimum="1" Value="{Binding Quantity}" FormatString="0"/>
 						<Button HorizontalAlignment="Center" Command="{Binding AddToCartCommand}">Add to Cart</Button>
 					</StackPanel>
 				</DataTemplate>

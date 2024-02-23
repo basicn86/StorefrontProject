@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace StorefrontProject.Models.Interfaces
 {
-    public interface IAPIService
+    public interface IApiClient
     {
         public Task<IEnumerable<NetworkResources.Product>> GetProductsAsync();
+
+        //place order
+        public Task PlaceOrderAsync(NetworkResources.OrderRequest orderRequest);
     }
 }
