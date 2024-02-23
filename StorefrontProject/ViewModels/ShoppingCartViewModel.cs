@@ -50,6 +50,15 @@ namespace StorefrontProject.ViewModels
                 ShoppingCartItems.Clear();
             });
 
+            //clear cart command
+            ClearCartCommand = ReactiveCommand.Create(() =>
+            {
+                ShoppingCartService.Instance?.Clear();
+                UpdateCartCommand.Execute().Subscribe();
+                //clear the ShoppingCartItems collection
+                ShoppingCartItems.Clear();
+            });
+
             //for each item in the shopping cart, add a new ShoppingCartItemViewModel to the ShoppingCartItems collection
             foreach (var item in items)
             {

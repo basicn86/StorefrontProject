@@ -30,7 +30,7 @@
 		<!--Horizontally aligned stack panel-->
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
 			<!--Trash cart button-->
-			<Button>Empty Cart</Button>
+			<Button Command="{Binding ClearCartCommand}">Empty Cart</Button>
 			<!--Checkout button-->
 			<Button Command="{Binding CheckoutCommand}">Checkout</Button>
 		</StackPanel>
