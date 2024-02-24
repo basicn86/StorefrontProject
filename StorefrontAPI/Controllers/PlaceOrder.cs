@@ -33,6 +33,8 @@ namespace StorefrontAPI.Controllers
             }
 
             //set the total price
+            //TODO: Compare the total price from the client to the total price calculated on the server
+            //TODO: if not the same, return an error
             order.TotalPrice = orderRequest.TotalPrice;
 
             //add the order to the list of orders
