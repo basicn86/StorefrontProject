@@ -11,7 +11,7 @@ namespace StorefrontAPI.Controllers
         public IActionResult Get()
         {
             //return the list of orders
-            return Ok(PlaceOrder._orders);
+            return Ok(MemoryDatabase.Orders);
         }
     }
 }
