@@ -60,6 +60,14 @@ namespace StorefrontProject.ViewModels
                 if (MainContent is ShoppingCartViewModel) return;
                 MainContent = new ShoppingCartViewModel(ReactiveCommand.Create(() => { UpdateShoppingCartBtnText(); }));
             });
+
+            //When clicking Orders menu, open the OrdersViewModel
+            OrdersMenuCommand = ReactiveCommand.Create(() =>
+            {
+                //avoid reloading the orders if it's already open
+                if (MainContent is OrdersViewModel) return;
+                MainContent = new OrdersViewModel();
+            });
         }
 
         //Update shopping cart button text

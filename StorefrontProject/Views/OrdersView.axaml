@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="StorefrontProject.Views.OrdersView"
+			 xmlns:vm="using:StorefrontProject.ViewModels"
+             x:DataType="vm:OrdersViewModel">
+	<StackPanel>
+		<ScrollViewer>
+			<ItemsControl ItemsSource="{Binding OrderList}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="10" Margin="10">
+							<!--ID of order-->
+							<TextBlock VerticalAlignment="Center" Text="{Binding Id}" Width="100"/>
+							<!--TotalPrice of the order-->
+							<TextBlock VerticalAlignment="Center" Text="{Binding TotalPrice}" Width="100"/>
+						</StackPanel>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</ScrollViewer>
+	</StackPanel>
+</UserControl>

@@ -61,5 +61,36 @@ namespace StorefrontProject.Models
 
             //return nothing
         }
+
+        //get orders from the server
+        public async Task<IEnumerable<NetworkResources.Order>> GetOrdersAsync()
+        {
+            //new HTTP client
+            HttpClient client = new HttpClient();
+
+            //client timeout
+            client.Timeout = TimeSpan.FromSeconds(15);
+
+            //http response
+            HttpResponseMessage responseMessage = await client.GetAsync(API_URL + "api/GetOrders");
+
+            //if the response is successful
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                //try to read the response as a list of orders
+                try
+                {
+                    IEnumerable<NetworkResources.Order> orders = await responseMessage.Content.ReadAsAsync<IEnumerable<NetworkResources.Order>>();
+                    return orders;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            //return empty ienumerable to avoid the error for now
+            return Enumerable.Empty<NetworkResources.Order>();
+        }
     }
 }
