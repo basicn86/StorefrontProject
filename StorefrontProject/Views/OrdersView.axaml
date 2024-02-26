@@ -13,9 +13,11 @@
 					<DataTemplate>
 						<StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="10" Margin="10">
 							<!--ID of order-->
-							<TextBlock VerticalAlignment="Center" Text="{Binding Id}" Width="100"/>
+							<TextBlock VerticalAlignment="Center" Text="{Binding Id}" Width="50"/>
 							<!--TotalPrice of the order-->
-							<TextBlock VerticalAlignment="Center" Text="{Binding TotalPriceString}" Width="100"/>
+							<TextBlock VerticalAlignment="Center" Text="{Binding TotalPriceString}" Width="50"/>
+							<!--Date of the order-->
+							<TextBlock VerticalAlignment="Center" Text="{Binding DateString}" Width="150"/>
 						</StackPanel>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>

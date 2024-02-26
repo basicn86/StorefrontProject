@@ -48,9 +48,11 @@ namespace StorefrontAPI.Controllers
 
             //set the total price of the order
             order.TotalPrice = TotalPrice;
-
             //assign ID equal to the number of orders in the list
             order.Id = MemoryDatabase.Orders.Count;
+            //set the date of the order to right now
+            order.Date = System.DateTime.Now;
+
             //add the order to the list of orders
             MemoryDatabase.Orders.Add(order);
 

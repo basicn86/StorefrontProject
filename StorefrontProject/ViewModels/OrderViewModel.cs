@@ -15,6 +15,11 @@ namespace StorefrontProject.ViewModels
         //total price of the order.
         public decimal TotalPrice { get; set; }
         public string TotalPriceString => TotalPrice.ToString("C");
+        //date of placement
+        public DateTime Date { get; set; }
+        //date string in dd/MM/yyyy - HH:mm format
+        public string DateString => Date.ToString("dd/MM/yyyy - HH:mm");
+
         //list of order items.
         public ObservableCollection<OrderItem> OrderItems { get; set; }
 
@@ -28,6 +33,7 @@ namespace StorefrontProject.ViewModels
         {
             Id = order.Id;
             TotalPrice = order.TotalPrice;
+            Date = order.Date;
             OrderItems = new ObservableCollection<OrderItem>(order.OrderItems);
         }
     }
