@@ -15,7 +15,7 @@
 							<!--ID of order-->
 							<TextBlock VerticalAlignment="Center" Text="{Binding Id}" Width="100"/>
 							<!--TotalPrice of the order-->
-							<TextBlock VerticalAlignment="Center" Text="{Binding TotalPrice}" Width="100"/>
+							<TextBlock VerticalAlignment="Center" Text="{Binding TotalPriceString}" Width="100"/>
 						</StackPanel>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
