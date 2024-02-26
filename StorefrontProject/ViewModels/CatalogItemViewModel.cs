@@ -38,6 +38,9 @@ namespace StorefrontProject.ViewModels
             get => quantity;
             set => this.RaiseAndSetIfChanged(ref quantity, value);
         }
+
+        //background color
+        public string BackgroundColor { get; set; } = "#FFFFFF";
         public ReactiveCommand<Unit, Unit>? AddToCartCommand { get; set; }
     }
 }

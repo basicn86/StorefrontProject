@@ -37,10 +37,15 @@ namespace StorefrontProject.ViewModels
             //Get the list of products from the API
             IEnumerable<NetworkResources.Product> products = await ApiService.Instance.GetProductsAsync();
 
+            bool OddItem = false;
             //add the products to the catalog items
             foreach (var product in products)
             {
                 CatalogItemViewModel catalogItem = new CatalogItemViewModel(product.Name, product.Price, null, UpdateShoppingCart, product);
+
+                //set the background color if the item is odd
+                if (OddItem) catalogItem.BackgroundColor = "#F0F0F0";
+                OddItem = !OddItem;
 
                 CatalogItems.Add(catalogItem);
             }

@@ -15,12 +15,12 @@
 			</ItemsControl.ItemsPanel>
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<StackPanel Orientation="Vertical" Spacing="5">
+					<StackPanel Orientation="Vertical" Spacing="5" Background="{Binding BackgroundColor}">
 						<Image Source="{Binding ProductImage}" Width="200" Height="200"></Image>
 						<TextBlock HorizontalAlignment="Center" Text="{Binding Name}"></TextBlock>
 						<TextBlock HorizontalAlignment="Center" Text="{Binding Price}"></TextBlock>
 						<NumericUpDown Width="150" Increment="1" Minimum="1" Value="{Binding Quantity}" FormatString="0"/>
-						<Button HorizontalAlignment="Center" Command="{Binding AddToCartCommand}">Add to Cart</Button>
+						<Button Margin="12" HorizontalAlignment="Center" Command="{Binding AddToCartCommand}">Add to Cart</Button>
 					</StackPanel>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
