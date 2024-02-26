@@ -34,12 +34,7 @@ namespace StorefrontProject.ViewModels
             foreach (var order in orders)
             {
                 //Convert the order to an OrderViewModel
-                var orderViewModel = new OrderViewModel
-                {
-                    Id = order.Id,
-                    TotalPrice = order.TotalPrice,
-                    OrderItems = new ObservableCollection<NetworkResources.OrderItem>(order.OrderItems)
-                };
+                var orderViewModel = new OrderViewModel(order);
 
                 //add the order to the observable collection
                 OrderList.Add(orderViewModel);

@@ -22,5 +22,13 @@ namespace StorefrontProject.ViewModels
         {
             OrderItems = new ObservableCollection<OrderItem>();
         }
+
+        //Generate an OrderViewModel from an NetworkResources.Order
+        public OrderViewModel(Order order)
+        {
+            Id = order.Id;
+            TotalPrice = order.TotalPrice;
+            OrderItems = new ObservableCollection<OrderItem>(order.OrderItems);
+        }
     }
 }
