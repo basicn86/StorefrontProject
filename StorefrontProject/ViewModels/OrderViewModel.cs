@@ -46,14 +46,17 @@ namespace StorefrontProject.ViewModels
                 var result = await Services.DialogService.ConfirmDialogInteraction.Handle(vm);
 
                 //print out to console if not null
-                if (result != null)
+                if (result != null && result == true)
                 {
-                    Console.WriteLine(result);
+                    NotifyOrderCancelled?.Execute(this).Subscribe();
                 }
             });
         }
 
         //reactive cancel order button
         public ReactiveCommand<Unit, Unit> CancelOrderCommand { get; set; }
+
+        //reactive command to notify the main window that the order has been cancelled
+        public ReactiveCommand<OrderViewModel, Unit>? NotifyOrderCancelled { get; set; }
     }
 }

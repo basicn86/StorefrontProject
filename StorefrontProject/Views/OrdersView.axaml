@@ -11,6 +11,7 @@
 	</Design.DataContext>
 	
 	<StackPanel>
+		<TextBlock IsVisible="{Binding MsgVisible}" Text="{Binding Msg}" HorizontalAlignment="Center"/>
 		<ScrollViewer>
 			<ItemsControl ItemsSource="{Binding OrderList}">
 				<ItemsControl.ItemTemplate>

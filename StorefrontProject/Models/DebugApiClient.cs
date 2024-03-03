@@ -40,5 +40,12 @@ namespace StorefrontProject.Models
             //return the list of orders for debugging
             return orders.AsEnumerable();
         }
+
+        //placeholder for remove order
+        public async Task RemoveOrderAsync(int orderId)
+        {
+            //fake order removal
+            await Task.Delay(1000);
+        }
     }
 }

@@ -92,5 +92,27 @@ namespace StorefrontProject.Models
             //return empty ienumerable to avoid the error for now
             return Enumerable.Empty<NetworkResources.Order>();
         }
+
+        //implement the function to remove the order
+        public async Task RemoveOrderAsync(int orderId)
+        {
+            //new HTTP client
+            HttpClient client = new HttpClient();
+
+            //client timeout
+            client.Timeout = TimeSpan.FromSeconds(15);
+
+            //http response
+            HttpResponseMessage responseMessage = await client.DeleteAsync(API_URL + "api/CancelOrder?orderId=" + orderId);
+
+            //if the response is successful
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return;
+            }
+
+            //throw an exception if the response is not successful
+            throw new Exception("Failed to remove order");
+        }
     }
 }
