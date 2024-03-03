@@ -6,18 +6,29 @@
              x:Class="StorefrontProject.Views.OrdersView"
 			 xmlns:vm="using:StorefrontProject.ViewModels"
              x:DataType="vm:OrdersViewModel">
+	<Design.DataContext>
+		<vm:DesignOrdersViewModel/>
+	</Design.DataContext>
+	
 	<StackPanel>
 		<ScrollViewer>
 			<ItemsControl ItemsSource="{Binding OrderList}">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="10" Margin="10">
+						<StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="" Margin="10">
 							<!--ID of order-->
-							<TextBlock VerticalAlignment="Center" Text="{Binding Id}" Width="50"/>
+							<TextBlock VerticalAlignment="Center" Width="30"><Bold>No:</Bold></TextBlock>
+							<TextBlock VerticalAlignment="Center" Text="{Binding Id}" Width="40"/>
 							<!--TotalPrice of the order-->
-							<TextBlock VerticalAlignment="Center" Text="{Binding TotalPriceString}" Width="50"/>
+							<TextBlock VerticalAlignment="Center" Width="85"><Bold>Total Price:</Bold></TextBlock>
+							<TextBlock VerticalAlignment="Center" Text="{Binding TotalPriceString}" Width="80"/>
+							
 							<!--Date of the order-->
-							<TextBlock VerticalAlignment="Center" Text="{Binding DateString}" Width="150"/>
+							<TextBlock VerticalAlignment="Center" Width="40"><Bold>Date:</Bold></TextBlock>
+							<TextBlock VerticalAlignment="Center" Text="{Binding DateString}" Width="170"/>
+
+							<!--Cancel Button Placeholder, code is not ready for it yet-->
+							<Button Background="LightCoral" VerticalAlignment="Center" Content="Cancel"/>
 						</StackPanel>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
