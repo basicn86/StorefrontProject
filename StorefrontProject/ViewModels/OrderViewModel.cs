@@ -37,26 +37,9 @@ namespace StorefrontProject.ViewModels
             TotalPrice = order.TotalPrice;
             Date = order.Date;
             OrderItems = new ObservableCollection<OrderItem>(order.OrderItems);
-
-            //reactive cancel order button
-            CancelOrderCommand = ReactiveCommand.CreateFromTask(async () =>
-            {
-                var vm = new ConfirmDialogViewModel("Are you sure you want to cancel this order?");
-
-                var result = await Services.DialogService.ConfirmDialogInteraction.Handle(vm);
-
-                //print out to console if not null
-                if (result != null && result == true)
-                {
-                    NotifyOrderCancelled?.Execute(this).Subscribe();
-                }
-            });
         }
 
         //reactive cancel order button
         public ReactiveCommand<Unit, Unit> CancelOrderCommand { get; set; }
-
-        //reactive command to notify the main window that the order has been cancelled
-        public ReactiveCommand<OrderViewModel, Unit>? NotifyOrderCancelled { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using Avalonia.ReactiveUI;
 using ReactiveUI;
 using StorefrontProject.Models;
 using System.Reactive;
+using System.Reactive.Linq;
 
 namespace StorefrontProject.ViewModels
 {
@@ -49,10 +50,13 @@ namespace StorefrontProject.ViewModels
                 //Convert the order to an OrderViewModel
                 var orderViewModel = new OrderViewModel(order);
 
-                //Inject the notify order cancelled command
-                orderViewModel.NotifyOrderCancelled = ReactiveCommand.Create<OrderViewModel, Unit>(order =>
+                //Inject the order cancelled command
+                orderViewModel.CancelOrderCommand = ReactiveCommand.CreateFromTask(async () =>
                 {
-                    _ = CancelOrder(order);
+                    var vm = new ConfirmDialogViewModel("Are you sure you want to cancel this order?");
+                    var result = await Services.DialogService.ConfirmDialogInteraction.Handle(vm);
+                    if (result != null && result == true)
+                        _ = CancelOrder(orderViewModel.Id);
                     return Unit.Default;
                 });
 
@@ -65,7 +69,7 @@ namespace StorefrontProject.ViewModels
         }
 
         //Cancel order method, usually called by the order item to notify the OrdersViewModel to cancel the order and refresh the list
-        public async Task CancelOrder(OrderViewModel order)
+        public async Task CancelOrder(int Id)
         {
             //Set the message to "Cancelling order..."
             Msg = "Cancelling order...";
@@ -73,7 +77,7 @@ namespace StorefrontProject.ViewModels
             //try to remove the order from the server
             try
             {
-                await ApiService.Instance.RemoveOrderAsync(order.Id);
+                await ApiService.Instance.RemoveOrderAsync(Id);
                 //Set the message to an empty string
                 Msg = "";
             }
