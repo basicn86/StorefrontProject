@@ -64,6 +64,7 @@ namespace StorefrontProject.ViewModels
             Msg = "";
         }
 
+        //Cancel order method, usually called by the order item to notify the OrdersViewModel to cancel the order and refresh the list
         public async Task CancelOrder(OrderViewModel order)
         {
             //Set the message to "Cancelling order..."
