@@ -28,7 +28,7 @@
 							<TextBlock VerticalAlignment="Center" Text="{Binding DateString}" Width="170"/>
 
 							<!--Cancel Button Placeholder, code is not ready for it yet-->
-							<Button Background="LightCoral" VerticalAlignment="Center" Content="Cancel"/>
+							<Button Background="LightCoral" VerticalAlignment="Center" Command="{Binding CancelOrderCommand}" Content="Cancel"/>
 						</StackPanel>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>

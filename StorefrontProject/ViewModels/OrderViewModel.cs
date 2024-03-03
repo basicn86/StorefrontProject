@@ -1,17 +1,16 @@
-﻿using NetworkResources;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Avalonia.ReactiveUI;
 using System.Reactive;
+using System.Reactive.Concurrency;
+using System.Reactive.Linq;
+using System.Windows.Input;
 using ReactiveUI;
+using NetworkResources;
 
 namespace StorefrontProject.ViewModels
 {
-    public class OrderViewModel
+    public class OrderViewModel : ViewModelBase
     {
         //order ID. This can be set to 0 on the client side. When placing an order, the server will assign a unique ID to the order, and disregard the client's ID.
         public int Id { get; set; }
@@ -38,6 +37,23 @@ namespace StorefrontProject.ViewModels
             TotalPrice = order.TotalPrice;
             Date = order.Date;
             OrderItems = new ObservableCollection<OrderItem>(order.OrderItems);
+
+            //reactive cancel order button
+            CancelOrderCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                var vm = new ConfirmDialogViewModel("Are you sure you want to cancel this order?");
+
+                var result = await Services.DialogService.ConfirmDialogInteraction.Handle(vm);
+
+                //print out to console if not null
+                if (result != null)
+                {
+                    Console.WriteLine(result);
+                }
+            });
         }
+
+        //reactive cancel order button
+        public ReactiveCommand<Unit, Unit> CancelOrderCommand { get; set; }
     }
 }

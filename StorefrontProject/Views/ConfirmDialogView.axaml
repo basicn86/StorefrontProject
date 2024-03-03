@@ -1,0 +1,21 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="200"
+		Width="400"
+		Height="200"
+        x:Class="StorefrontProject.Views.ConfirmDialogView"
+		xmlns:vm="using:StorefrontProject.ViewModels"
+		x:DataType="vm:ConfirmDialogViewModel"
+        Title="ConfirmDialogView">
+	<StackPanel Orientation="Vertical" VerticalAlignment="Center" Spacing="10">
+		<TextBlock HorizontalAlignment="Center" Text="{Binding Message}"/>
+		<StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+			<!--Placeholder buttons-->
+			<Button Content="Yes" Command="{Binding YesCommand}"/>
+			<Button Content="No" Command="{Binding NoCommand}"/>
+			<Button Content="Cancel" Command="{Binding NoCommand}"/>
+		</StackPanel>
+	</StackPanel>
+</Window>
