@@ -12,5 +12,11 @@ namespace StorefrontProject.Models.Interfaces
 
         //place order
         public Task PlaceOrderAsync(NetworkResources.OrderRequest orderRequest);
+
+        //get orders
+        public Task<IEnumerable<NetworkResources.Order>> GetOrdersAsync();
+
+        //remove order
+        public Task RemoveOrderAsync(int orderId);
     }
 }

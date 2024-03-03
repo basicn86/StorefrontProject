@@ -12,6 +12,8 @@ namespace NetworkResources
         public int Id { get; set; }
         //total price of the order.
         public decimal TotalPrice { get; set; }
+        //date of placement
+        public DateTime Date { get; set; }
         //list of order items.
         public List<OrderItem> OrderItems { get; set; }
 
