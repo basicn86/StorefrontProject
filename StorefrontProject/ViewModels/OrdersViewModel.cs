@@ -55,7 +55,7 @@ namespace StorefrontProject.ViewModels
                 {
                     var vm = new ConfirmDialogViewModel("Are you sure you want to cancel this order?");
                     var result = await Services.DialogService.ConfirmDialogInteraction.Handle(vm);
-                    if (result != null && result == true)
+                    if (result == true)
                         _ = CancelOrder(orderViewModel.Id);
                     return Unit.Default;
                 });
