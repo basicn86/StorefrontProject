@@ -12,6 +12,7 @@ using System.Reactive.Linq;
 
 namespace StorefrontProject.ViewModels
 {
+    //This class is for the order view. It contains a list of orders.
     public class OrdersViewModel : ViewModelBase
     {
         //observable collection of orders
@@ -57,6 +58,17 @@ namespace StorefrontProject.ViewModels
                     var result = await Services.DialogService.ConfirmDialogInteraction.Handle(vm);
                     if (result == true)
                         _ = CancelOrder(orderViewModel.Id);
+                    return Unit.Default;
+                });
+
+                orderViewModel.SaveChangesCommand = ReactiveCommand.CreateFromTask(async () =>
+                {
+                    var vm = new ConfirmDialogViewModel("Are you sure you want to save changes to this order?\n" +
+                        "Your old total is " + orderViewModel.InitialTotalPriceString + "\n" +
+                        "Your new total is " + orderViewModel.TotalPriceString);
+                    var result = await Services.DialogService.ConfirmDialogInteraction.Handle(vm);
+                    if (result == true) return Unit.Default;
+                        //_ = SaveChanges(orderViewModel);
                     return Unit.Default;
                 });
 
