@@ -40,7 +40,7 @@ namespace StorefrontProject.ViewModels
         //date string in dd/MM/yyyy - HH:mm format
         public string DateString => Date.ToString("dd/MM/yyyy - HH:mm");
 
-        private bool showDetails = true;
+        private bool showDetails = false;
         public bool ShowDetails
         {
             get => showDetails;
