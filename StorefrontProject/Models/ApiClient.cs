@@ -114,5 +114,27 @@ namespace StorefrontProject.Models
             //throw an exception if the response is not successful
             throw new Exception("Failed to remove order");
         }
+
+        //implement the function to update the order
+        public async Task UpdateOrderAsync(NetworkResources.Order order)
+        {
+            //new HTTP client
+            HttpClient client = new HttpClient();
+
+            //client timeout
+            client.Timeout = TimeSpan.FromSeconds(15);
+
+            //http response
+            HttpResponseMessage responseMessage = await client.PutAsJsonAsync(API_URL + "api/UpdateOrder", order);
+
+            //if the response is successful
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return;
+            }
+
+            //throw an exception if the response is not successful
+            throw new Exception("Failed to update order");
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace StorefrontProject.ViewModels
         public int Id { get; set; }
         
         //TotalPrice, it is determined by total price of all order items, calculated at runtime
-        public decimal? TotalPrice
+        public decimal TotalPrice
         {
             get {
                 //calculate the total price of all order items
@@ -32,7 +32,7 @@ namespace StorefrontProject.ViewModels
             }
         }
         //TotalPriceString will return the total price as a currency string, but an empty string if the total price is null
-        public string TotalPriceString => TotalPrice.HasValue ? TotalPrice.Value.ToString("C") : string.Empty;
+        public string TotalPriceString => TotalPrice.ToString("C");
         public string InitialTotalPriceString { get; set; }
 
         //date of placement
@@ -98,16 +98,37 @@ namespace StorefrontProject.ViewModels
             });
         }
 
-        //reactive cancel order button
-        public ReactiveCommand<Unit, Unit> CancelOrderCommand { get; set; }
+        //Method to convert the OrderViewModel to a NetworkResources.Order
+        public NetworkResources.Order ToOrder()
+        {
+            var order = new NetworkResources.Order
+            {
+                Id = Id,
+                Date = Date,
+                OrderItems = new System.Collections.Generic.List<NetworkResources.OrderItem>(),
+                TotalPrice = TotalPrice
+            };
+            foreach (var item in OrderItems)
+            {
+                order.OrderItems.Add(new NetworkResources.OrderItem
+                {
+                    //copy the properties from the OrderItemViewModel to the OrderItem
+                    ProductId = item.ProductId,
+                    Name = item.Name,
+                    Quantity = item.Quantity,
+                    Price = item.Price 
+                });
+            }
+            return order;
+        }
 
-        //show details button
+        #region ReactiveCommands
+        public ReactiveCommand<Unit, Unit> CancelOrderCommand { get; set; }
         public ReactiveCommand<Unit, Unit> ShowDetailsCommand { get; set; }
 
-        //save changes button
         public ReactiveCommand<Unit, Unit> SaveChangesCommand { get; set; }
 
-        //cancel changes button
         public ReactiveCommand<Unit, Unit> CancelChangesCommand { get; set; }
+        #endregion
     }
 }

@@ -67,8 +67,7 @@ namespace StorefrontProject.ViewModels
                         "Your old total is " + orderViewModel.InitialTotalPriceString + "\n" +
                         "Your new total is " + orderViewModel.TotalPriceString);
                     var result = await Services.DialogService.ConfirmDialogInteraction.Handle(vm);
-                    if (result == true) return Unit.Default;
-                        //_ = SaveChanges(orderViewModel);
+                    if (result == true) _ = SaveChanges(orderViewModel);
                     return Unit.Default;
                 });
 
@@ -97,6 +96,34 @@ namespace StorefrontProject.ViewModels
             {
                 //Set the message to an error message
                 Msg = "Cancel Failed : " + e.Message;
+                return;
+            }
+
+            //tell the user the orders are loading
+            Msg = "Loading orders...";
+
+            //reload the orders
+            OrderList.Clear();
+            await GetOrders();
+        }
+
+        //Method to save changes to an order
+        public async Task SaveChanges(OrderViewModel orderViewModel)
+        {
+            //Set the message to "Saving changes..."
+            Msg = "Saving changes...";
+
+            //try to update the order on the server
+            try
+            {
+                await ApiService.Instance.UpdateOrderAsync(orderViewModel.ToOrder());
+                //Set the message to an empty string
+                Msg = "";
+            }
+            catch (Exception e)
+            {
+                //Set the message to an error message
+                Msg = "Save Failed : " + e.Message;
                 return;
             }
 

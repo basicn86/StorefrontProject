@@ -13,39 +13,39 @@ namespace StorefrontProject.ViewModels
     public class OrderItemViewModel : ViewModelBase
     {
         //product ID
-        private int? id;
-        public int? ProductId
+        private int id = 0;
+        public int ProductId
         {
             get => id;
             set => this.RaiseAndSetIfChanged(ref id, value);
         }
 
         //product name
-        private string? name;
-        public string? Name
+        private string name = "";
+        public string Name
         {
             get => name;
             set => this.RaiseAndSetIfChanged(ref name, value);
         }
 
         //quantity private and public property
-        private int? quantity;
-        public int? Quantity
+        private int quantity = 0;
+        public int Quantity
         {
             get => quantity;
             set => this.RaiseAndSetIfChanged(ref quantity, value);
         }
 
         //product price, not settable
-        private decimal? price;
-        public decimal? Price
+        private decimal price = 0;
+        public decimal Price
         {
             get => price;
             set => this.RaiseAndSetIfChanged(ref price, value);
         }
 
-        //PriceString will return the price as a currency string, but an empty string if the price is null
-        public string PriceString => Price.HasValue ? Price.Value.ToString("C") : string.Empty;
+        //PriceString will return the price as a currency string
+        public string PriceString => Price.ToString("C");
 
         //empty constructor
         public OrderItemViewModel()

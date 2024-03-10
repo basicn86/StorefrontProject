@@ -43,7 +43,7 @@
 											<!--Product Name-->
 											<TextBlock VerticalAlignment="Center" Width="150" Text="{Binding Name}"/>
 											<!--Numeric up and down for quantity-->
-											<NumericUpDown VerticalAlignment="Center" Width="150" Value="{Binding Quantity}" Minimum="1" Maximum="100" Increment="1"/>
+											<NumericUpDown VerticalAlignment="Center" Width="150" Value="{Binding Quantity}" Minimum="0" Maximum="100" Increment="1"/>
 											<!--Price, binded to "Price"-->
 											<TextBlock VerticalAlignment="Center" Width="100" Text="{Binding PriceString}"/>
 										</StackPanel>

@@ -47,5 +47,12 @@ namespace StorefrontProject.Models
             //fake order removal
             await Task.Delay(1000);
         }
+
+        //placeholder for update order
+        public async Task UpdateOrderAsync(NetworkResources.Order order)
+        {
+            //fake order update
+            await Task.Delay(1000);
+        }
     }
 }
