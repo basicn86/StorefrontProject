@@ -56,7 +56,7 @@ namespace StorefrontProject.Models
             //if the response is not successful
             if (!responseMessage.IsSuccessStatusCode)
             {
-                throw new Exception("Failed to place order");
+                throw new Exception("Server: " + await responseMessage.Content.ReadAsStringAsync());
             }
 
             //return nothing
@@ -112,7 +112,7 @@ namespace StorefrontProject.Models
             }
 
             //throw an exception if the response is not successful
-            throw new Exception("Failed to remove order");
+            throw new Exception("Server:" + await responseMessage.Content.ReadAsStringAsync());
         }
 
         //implement the function to update the order
@@ -133,8 +133,8 @@ namespace StorefrontProject.Models
                 return;
             }
 
-            //throw an exception if the response is not successful
-            throw new Exception("Failed to update order");
+            //throw an exception if the response is not successful, and display the response body
+            throw new Exception("Server: " + await responseMessage.Content.ReadAsStringAsync());
         }
     }
 }
