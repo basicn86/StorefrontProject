@@ -114,12 +114,12 @@ namespace StorefrontProject.ViewModels
         }
 
         #region ReactiveCommands
-        public ReactiveCommand<Unit, Unit> CancelOrderCommand { get; set; }
-        public ReactiveCommand<Unit, Unit> ShowDetailsCommand { get; set; }
+        public ReactiveCommand<Unit, Unit>? CancelOrderCommand { get; set; }
+        public ReactiveCommand<Unit, Unit>? ShowDetailsCommand { get; set; }
 
-        public ReactiveCommand<Unit, Unit> SaveChangesCommand { get; set; }
+        public ReactiveCommand<Unit, Unit>? SaveChangesCommand { get; set; }
 
-        public ReactiveCommand<Unit, Unit> CancelChangesCommand { get; set; }
+        public ReactiveCommand<Unit, Unit>? CancelChangesCommand { get; set; }
         #endregion
     }
 }
