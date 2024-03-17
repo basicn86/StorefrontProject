@@ -17,6 +17,9 @@ namespace StorefrontProject.Models
             products.Add(new NetworkResources.Product { Name = "Product 2", Price = 20.00m });
             products.Add(new NetworkResources.Product { Name = "Product 3", Price = 30.00m });
 
+            //fake await
+            await Task.Delay(100);
+
             //return the list of products for debugging
             return products.AsEnumerable();
         }
@@ -36,6 +39,9 @@ namespace StorefrontProject.Models
             orders.Add(new NetworkResources.Order { Id = 1, TotalPrice = 10.00m });
             orders.Add(new NetworkResources.Order { Id = 2, TotalPrice = 20.00m });
             orders.Add(new NetworkResources.Order { Id = 3, TotalPrice = 30.00m });
+
+            //fake await
+            await Task.Delay(100);
 
             //return the list of orders for debugging
             return orders.AsEnumerable();

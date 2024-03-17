@@ -16,11 +16,6 @@ namespace StorefrontProject.ViewModels
         {
             Message = message;
 
-            SetupReactiveCommands();
-        }
-
-        private void SetupReactiveCommands()
-        {
             YesCommand = ReactiveCommand.Create(() =>
             {
                 return true;
