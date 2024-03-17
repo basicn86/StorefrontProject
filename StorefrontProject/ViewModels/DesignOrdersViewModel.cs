@@ -12,53 +12,59 @@ namespace StorefrontProject.ViewModels
         //constructor with example data
         public DesignOrdersViewModel()
         {
-            OrderList = new System.Collections.ObjectModel.ObservableCollection<OrderViewModel>
+            OrderList = new System.Collections.ObjectModel.ObservableCollection<OrderViewModel>();
+
+            Order testOrder = new Order()
             {
-                new OrderViewModel
+                Id = 1,
+                Date = DateTime.Now,
+                TotalPrice = 30.00m,
+                OrderItems = new List<OrderItem>()
                 {
-                    Id = 1,
-                    Date = DateTime.Now,
-                    OrderItems = new System.Collections.ObjectModel.ObservableCollection<OrderItemViewModel>
+                    new OrderItem()
                     {
-                        new OrderItemViewModel
-                        {
-                            ProductId = 1,
-                            Quantity = 2,
-                            Price = 60m,
-                            Name = "Product 1"
-                        },
-                        new OrderItemViewModel
-                        {
-                            ProductId = 2,
-                            Quantity = 3,
-                            Price = 20m,
-                            Name = "Product 2"
-                        }
-                    }
-                },
-                new OrderViewModel
-                {
-                    Id = 2,
-                    Date = DateTime.Now.AddDays(-1),
-                    OrderItems = new System.Collections.ObjectModel.ObservableCollection<OrderItemViewModel>
+                        ProductId = 1,
+                        Name = "Product 1",
+                        Quantity = 1,
+                        Price = 10.00m
+                    },
+                    new OrderItem()
                     {
-                        new OrderItemViewModel
-                        {
-                            ProductId = 3,
-                            Quantity = 4,
-                            Price = 30m,
-                            Name = "Product 3"
-                        },
-                        new OrderItemViewModel
-                        {
-                            ProductId = 4,
-                            Quantity = 5,
-                            Price = 40m,
-                            Name = "Product 4"
-                        }
+                        ProductId = 2,
+                        Name = "Product 2",
+                        Quantity = 2,
+                        Price = 20.00m
                     }
                 }
             };
+            OrderList.Add(new OrderViewModel(testOrder));
+
+            //add one more test order
+            testOrder = new Order()
+            {
+                Id = 2,
+                Date = DateTime.Now,
+                TotalPrice = 100.00m,
+                OrderItems = new List<OrderItem>()
+                {
+                    new OrderItem()
+                    {
+                        ProductId = 2,
+                        Name = "Product 2",
+                        Quantity = 2,
+                        Price = 20.00m
+                    },
+                    new OrderItem()
+                    {
+                        ProductId = 3,
+                        Name = "Product 3",
+                        Quantity = 2,
+                        Price = 30.00m
+                    }
+                }
+            };
+
+            OrderList.Add(new OrderViewModel(testOrder));
         }
     }
 }

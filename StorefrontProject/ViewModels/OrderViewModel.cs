@@ -48,11 +48,6 @@ namespace StorefrontProject.ViewModels
         //list of original order items, used to cancel changes
         public ObservableCollection<OrderItemViewModel> OriginalOrderItems { get; set; }
 
-        public OrderViewModel()
-        {
-            OrderItems = new ObservableCollection<OrderItemViewModel>();
-        }
-
         //Generate an OrderViewModel from an NetworkResources.Order
         public OrderViewModel(NetworkResources.Order order)
         {
