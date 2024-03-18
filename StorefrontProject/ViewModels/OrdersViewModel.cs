@@ -12,12 +12,13 @@ using System.Reactive.Linq;
 
 namespace StorefrontProject.ViewModels
 {
+    //This class is for the order view. It contains a list of orders.
     public class OrdersViewModel : ViewModelBase
     {
         //observable collection of orders
         public ObservableCollection<OrderViewModel> OrderList { get; set; }
 
-        private string msg;
+        private string msg = "";
         public string Msg
         {
             get => msg;
@@ -27,9 +28,8 @@ namespace StorefrontProject.ViewModels
 
         public OrdersViewModel()
         {
-            //initialize the observable collection
             OrderList = new ObservableCollection<OrderViewModel>();
-            //get the orders from the server
+
             _ = GetOrders();
         }
 
@@ -60,6 +60,16 @@ namespace StorefrontProject.ViewModels
                     return Unit.Default;
                 });
 
+                orderViewModel.SaveChangesCommand = ReactiveCommand.CreateFromTask(async () =>
+                {
+                    var vm = new ConfirmDialogViewModel("Are you sure you want to save changes to this order?\n" +
+                        "Your old total is " + orderViewModel.InitialTotalPriceString + "\n" +
+                        "Your new total is " + orderViewModel.TotalPriceString);
+                    var result = await Services.DialogService.ConfirmDialogInteraction.Handle(vm);
+                    if (result == true) _ = SaveChanges(orderViewModel);
+                    return Unit.Default;
+                });
+
                 //add the order to the observable collection
                 OrderList.Add(orderViewModel);
             }
@@ -71,6 +81,8 @@ namespace StorefrontProject.ViewModels
         //Cancel order method, usually called by the order item to notify the OrdersViewModel to cancel the order and refresh the list
         public async Task CancelOrder(int Id)
         {
+            if(ApiService.Instance == null) return;
+
             //Set the message to "Cancelling order..."
             Msg = "Cancelling order...";
 
@@ -85,6 +97,36 @@ namespace StorefrontProject.ViewModels
             {
                 //Set the message to an error message
                 Msg = "Cancel Failed : " + e.Message;
+                return;
+            }
+
+            //tell the user the orders are loading
+            Msg = "Loading orders...";
+
+            //reload the orders
+            OrderList.Clear();
+            await GetOrders();
+        }
+
+        //Method to save changes to an order
+        public async Task SaveChanges(OrderViewModel orderViewModel)
+        {
+            if(ApiService.Instance == null) return;
+
+            //Set the message to "Saving changes..."
+            Msg = "Saving changes...";
+
+            //try to update the order on the server
+            try
+            {
+                await ApiService.Instance.UpdateOrderAsync(orderViewModel.ToOrder());
+                //Set the message to an empty string
+                Msg = "";
+            }
+            catch (Exception e)
+            {
+                //Set the message to an error message
+                Msg = "Save Failed : " + e.Message;
                 return;
             }
 

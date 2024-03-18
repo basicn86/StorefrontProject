@@ -2,6 +2,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
 using System;
+using System.Reactive.Disposables;
 
 namespace StorefrontProject.Views;
 
@@ -11,7 +12,16 @@ public partial class ConfirmDialogView : ReactiveWindow<ViewModels.ConfirmDialog
     {
         InitializeComponent();
 
-        this.WhenActivated(lambda => lambda(ViewModel?.YesCommand.Subscribe(result => Close(result))));
-        this.WhenActivated(lambda => lambda(ViewModel?.NoCommand.Subscribe(result => Close(result))));
+        this.WhenActivated(disposables =>
+        {
+            if (ViewModel?.YesCommand != null)
+            {
+                ViewModel.YesCommand.Subscribe(result => Close(result));
+            }
+            if (ViewModel?.NoCommand != null)
+            {
+                ViewModel.NoCommand.Subscribe(result => Close(result));
+            }
+        });
     }
 }

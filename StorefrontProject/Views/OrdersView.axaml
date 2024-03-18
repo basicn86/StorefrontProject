@@ -16,20 +16,46 @@
 			<ItemsControl ItemsSource="{Binding OrderList}">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="" Margin="10">
-							<!--ID of order-->
-							<TextBlock VerticalAlignment="Center" Width="30"><Bold>No:</Bold></TextBlock>
-							<TextBlock VerticalAlignment="Center" Text="{Binding Id}" Width="40"/>
-							<!--TotalPrice of the order-->
-							<TextBlock VerticalAlignment="Center" Width="85"><Bold>Total Price:</Bold></TextBlock>
-							<TextBlock VerticalAlignment="Center" Text="{Binding TotalPriceString}" Width="80"/>
+						<StackPanel Orientation="Vertical">
+							<!--Order Line-->
+							<StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="" Margin="10">
+								<!--ID of order-->
+								<TextBlock VerticalAlignment="Center" Width="30"><Bold>No:</Bold></TextBlock>
+								<TextBlock VerticalAlignment="Center" Text="{Binding Id}" Width="40"/>
+								<!--TotalPrice of the order-->
+								<TextBlock VerticalAlignment="Center" Width="85"><Bold>Total Price:</Bold></TextBlock>
+								<TextBlock VerticalAlignment="Center" Text="{Binding TotalPriceString}" Width="80"/>
 							
-							<!--Date of the order-->
-							<TextBlock VerticalAlignment="Center" Width="40"><Bold>Date:</Bold></TextBlock>
-							<TextBlock VerticalAlignment="Center" Text="{Binding DateString}" Width="170"/>
+								<!--Date of the order-->
+								<TextBlock VerticalAlignment="Center" Width="40"><Bold>Date:</Bold></TextBlock>
+								<TextBlock VerticalAlignment="Center" Text="{Binding DateString}" Width="170"/>
 
-							<!--Cancel Button Placeholder, code is not ready for it yet-->
-							<Button Background="LightCoral" VerticalAlignment="Center" Command="{Binding CancelOrderCommand}" Content="Cancel"/>
+								<!--View order details button, no code yet-->
+								<Button Background="LightGreen" VerticalAlignment="Center" Command="{Binding ShowDetailsCommand}" Content="View Details"/>
+								<!--Cancel Button Placeholder, code is not ready for it yet-->
+								<Button Background="LightCoral" VerticalAlignment="Center" Command="{Binding CancelOrderCommand}" Content="Cancel"/>
+							</StackPanel>
+							<!--Order Details-->
+							<ItemsControl IsVisible="{Binding ShowDetails}" ItemsSource="{Binding OrderItems}" HorizontalAlignment="Center">
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<StackPanel Orientation="Horizontal" Margin="10" Spacing="10">
+											<!--Product Name-->
+											<TextBlock VerticalAlignment="Center" Width="150" Text="{Binding Name}"/>
+											<!--Numeric up and down for quantity-->
+											<NumericUpDown VerticalAlignment="Center" Width="150" Value="{Binding Quantity}" Minimum="0" Maximum="100" Increment="1"/>
+											<!--Price, binded to "Price"-->
+											<TextBlock VerticalAlignment="Center" Width="100" Text="{Binding PriceString}"/>
+										</StackPanel>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+							<!--Stackpanel with save changes button, cancel changes, and hide details button-->
+							<StackPanel IsVisible="{Binding ShowDetails}" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10" Spacing="10">
+								<Button Command="{Binding SaveChangesCommand}" Background="LightGreen" Content="Save Changes"/>
+								<Button Command="{Binding CancelChangesCommand}" Background="LightCoral" Content="Cancel Changes"/>
+								<Button Command="{Binding ShowDetailsCommand}" Background="LightBlue" Content="Hide Details"/>
+							</StackPanel>
 						</StackPanel>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>

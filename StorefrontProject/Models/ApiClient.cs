@@ -56,7 +56,7 @@ namespace StorefrontProject.Models
             //if the response is not successful
             if (!responseMessage.IsSuccessStatusCode)
             {
-                throw new Exception("Failed to place order");
+                throw new Exception("Server: " + await responseMessage.Content.ReadAsStringAsync());
             }
 
             //return nothing
@@ -112,7 +112,29 @@ namespace StorefrontProject.Models
             }
 
             //throw an exception if the response is not successful
-            throw new Exception("Failed to remove order");
+            throw new Exception("Server:" + await responseMessage.Content.ReadAsStringAsync());
+        }
+
+        //implement the function to update the order
+        public async Task UpdateOrderAsync(NetworkResources.Order order)
+        {
+            //new HTTP client
+            HttpClient client = new HttpClient();
+
+            //client timeout
+            client.Timeout = TimeSpan.FromSeconds(15);
+
+            //http response
+            HttpResponseMessage responseMessage = await client.PutAsJsonAsync(API_URL + "api/UpdateOrder", order);
+
+            //if the response is successful
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return;
+            }
+
+            //throw an exception if the response is not successful, and display the response body
+            throw new Exception("Server: " + await responseMessage.Content.ReadAsStringAsync());
         }
     }
 }
