@@ -15,7 +15,7 @@
                 {
                     new NetworkResources.OrderItem
                     {
-                        ProductId = 1,
+                        OrderId = 1,
                         Quantity = 1,
                         Price = 60.00m,
                         Name = "Walnuts"

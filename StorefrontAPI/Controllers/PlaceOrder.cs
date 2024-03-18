@@ -28,7 +28,7 @@ namespace StorefrontAPI.Controllers
                 //create a new order item
                 var newOrderItem = new NetworkResources.OrderItem
                 {
-                    ProductId = product.Id,
+                    OrderId = product.Id,
                     Quantity = orderedItem.Value,
                     Price = product.Price,
                     Name = product.Name

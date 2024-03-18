@@ -11,7 +11,7 @@ namespace StorefrontProject.Models
     public class ApiClient : IApiClient
     {
         //local host API URL
-        private const string API_URL = "http://localhost:5000/";
+        private const string API_URL = "https://j7u565xxk7.execute-api.us-east-1.amazonaws.com/";
 
         //get products from the database
         public async Task<IEnumerable<NetworkResources.Product>> GetProductsAsync()
@@ -21,7 +21,7 @@ namespace StorefrontProject.Models
             client.Timeout = TimeSpan.FromSeconds(15);
 
             //try to get the products from the API
-            HttpResponseMessage responseMessage = await client.GetAsync(API_URL + "api/GetProducts");
+            HttpResponseMessage responseMessage = await client.GetAsync(API_URL + "api/products");
 
             //if the response is successful
             if (responseMessage.IsSuccessStatusCode)
@@ -72,7 +72,7 @@ namespace StorefrontProject.Models
             client.Timeout = TimeSpan.FromSeconds(15);
 
             //http response
-            HttpResponseMessage responseMessage = await client.GetAsync(API_URL + "api/GetOrders");
+            HttpResponseMessage responseMessage = await client.GetAsync(API_URL + "api/orders");
 
             //if the response is successful
             if (responseMessage.IsSuccessStatusCode)
@@ -125,7 +125,7 @@ namespace StorefrontProject.Models
             client.Timeout = TimeSpan.FromSeconds(15);
 
             //http response
-            HttpResponseMessage responseMessage = await client.PutAsJsonAsync(API_URL + "api/UpdateOrder", order);
+            HttpResponseMessage responseMessage = await client.PutAsJsonAsync(API_URL + "api/orders", order);
 
             //if the response is successful
             if (responseMessage.IsSuccessStatusCode)

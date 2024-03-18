@@ -24,7 +24,7 @@ namespace StorefrontAPI.Controllers
             List<Product> products = new List<Product>();
             foreach (var orderItem in order.OrderItems)
             {
-                Product? product = MemoryDatabase.Products.Find(p => p.Id == orderItem.ProductId);
+                Product? product = MemoryDatabase.Products.Find(p => p.Id == orderItem.OrderId);
                 if (product == null) return BadRequest("Product not found");
                 products.Add(product);
             }
@@ -33,7 +33,7 @@ namespace StorefrontAPI.Controllers
             decimal totalPrice = 0;
             foreach (var product in products)
             {
-                OrderItem? orderItem = order.OrderItems.Find(oi => oi.ProductId == product.Id);
+                OrderItem? orderItem = order.OrderItems.Find(oi => oi.OrderId == product.Id);
                 if (orderItem == null) return BadRequest("Order item not found");
                 totalPrice += product.Price * orderItem.Quantity;
             }

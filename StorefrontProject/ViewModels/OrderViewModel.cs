@@ -104,7 +104,8 @@ namespace StorefrontProject.ViewModels
                 order.OrderItems.Add(new NetworkResources.OrderItem
                 {
                     //copy the properties from the OrderItemViewModel to the OrderItem
-                    ProductId = item.ProductId,
+                    Id = item.Id,
+                    OrderId = order.Id,
                     Name = item.Name,
                     Quantity = item.Quantity,
                     Price = item.Price 

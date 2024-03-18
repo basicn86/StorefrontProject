@@ -23,14 +23,14 @@ namespace StorefrontProject.ViewModels
                 {
                     new OrderItem()
                     {
-                        ProductId = 1,
+                        OrderId = 1,
                         Name = "Product 1",
                         Quantity = 1,
                         Price = 10.00m
                     },
                     new OrderItem()
                     {
-                        ProductId = 2,
+                        OrderId = 2,
                         Name = "Product 2",
                         Quantity = 2,
                         Price = 20.00m
@@ -49,14 +49,14 @@ namespace StorefrontProject.ViewModels
                 {
                     new OrderItem()
                     {
-                        ProductId = 2,
+                        OrderId = 2,
                         Name = "Product 2",
                         Quantity = 2,
                         Price = 20.00m
                     },
                     new OrderItem()
                     {
-                        ProductId = 3,
+                        OrderId = 3,
                         Name = "Product 3",
                         Quantity = 2,
                         Price = 30.00m
