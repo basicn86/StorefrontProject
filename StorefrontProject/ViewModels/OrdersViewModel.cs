@@ -18,7 +18,7 @@ namespace StorefrontProject.ViewModels
         //observable collection of orders
         public ObservableCollection<OrderViewModel> OrderList { get; set; }
 
-        private string msg;
+        private string msg = "";
         public string Msg
         {
             get => msg;
@@ -28,9 +28,8 @@ namespace StorefrontProject.ViewModels
 
         public OrdersViewModel()
         {
-            //initialize the observable collection
             OrderList = new ObservableCollection<OrderViewModel>();
-            //get the orders from the server
+
             _ = GetOrders();
         }
 
@@ -112,6 +111,8 @@ namespace StorefrontProject.ViewModels
         //Method to save changes to an order
         public async Task SaveChanges(OrderViewModel orderViewModel)
         {
+            if(ApiService.Instance == null) return;
+
             //Set the message to "Saving changes..."
             Msg = "Saving changes...";
 
