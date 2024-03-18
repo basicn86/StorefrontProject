@@ -103,7 +103,7 @@ namespace StorefrontProject.Models
             client.Timeout = TimeSpan.FromSeconds(15);
 
             //http response
-            HttpResponseMessage responseMessage = await client.DeleteAsync(API_URL + "api/CancelOrder?orderId=" + orderId);
+            HttpResponseMessage responseMessage = await client.DeleteAsync(API_URL + "api/orders?id=" + orderId);
 
             //if the response is successful
             if (responseMessage.IsSuccessStatusCode)
