@@ -8,14 +8,14 @@
         {
             new NetworkResources.Order
             {
-                Id = 0,
+                Id = new Guid(),
                 Date = System.DateTime.Now,
                 TotalPrice = 60.00m,
                 OrderItems = new List<NetworkResources.OrderItem>
                 {
                     new NetworkResources.OrderItem
                     {
-                        OrderId = 1,
+                        OrderId = new Guid(),
                         Quantity = 1,
                         Price = 60.00m,
                         Name = "Walnuts"

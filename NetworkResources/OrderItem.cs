@@ -3,9 +3,9 @@
     public record OrderItem
     {
         //public ID
-        public int Id { get; init; }
+        public Guid Id { get; init; }
         //reference to product ID, can be set by the client
-        public int OrderId { get; init; }
+        public Guid OrderId { get; init; }
         //quantity of product, can be set by the client
         public int Quantity { get; init; }
         //price of product, to be set by the server

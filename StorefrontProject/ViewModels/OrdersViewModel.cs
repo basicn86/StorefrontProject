@@ -79,7 +79,7 @@ namespace StorefrontProject.ViewModels
         }
 
         //Cancel order method, usually called by the order item to notify the OrdersViewModel to cancel the order and refresh the list
-        public async Task CancelOrder(int Id)
+        public async Task CancelOrder(Guid Id)
         {
             if(ApiService.Instance == null) return;
 

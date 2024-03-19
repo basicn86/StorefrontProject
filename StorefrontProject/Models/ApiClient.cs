@@ -11,7 +11,7 @@ namespace StorefrontProject.Models
     public class ApiClient : IApiClient
     {
         //local host API URL
-        private const string API_URL = "https://j7u565xxk7.execute-api.us-east-1.amazonaws.com/";
+        private const string API_URL = "https://atxfur7tik.execute-api.us-east-1.amazonaws.com/";
 
         //get products from the database
         public async Task<IEnumerable<NetworkResources.Product>> GetProductsAsync()
@@ -42,7 +42,7 @@ namespace StorefrontProject.Models
         }
 
         //placeholder for placing an order
-        public async Task PlaceOrderAsync(NetworkResources.OrderRequest orderRequest)
+        public async Task PlaceOrderAsync(NetworkResources.Order order)
         {
             //new HTTP client
             HttpClient client = new HttpClient();
@@ -51,7 +51,7 @@ namespace StorefrontProject.Models
             client.Timeout = TimeSpan.FromSeconds(15);
 
             //http response
-            HttpResponseMessage responseMessage = await client.PostAsJsonAsync(API_URL + "api/PlaceOrder", orderRequest);
+            HttpResponseMessage responseMessage = await client.PostAsJsonAsync(API_URL + "api/orders", order);
 
             //if the response is not successful
             if (!responseMessage.IsSuccessStatusCode)
@@ -94,7 +94,7 @@ namespace StorefrontProject.Models
         }
 
         //implement the function to remove the order
-        public async Task RemoveOrderAsync(int orderId)
+        public async Task RemoveOrderAsync(Guid orderId)
         {
             //new HTTP client
             HttpClient client = new HttpClient();

@@ -14,9 +14,9 @@ namespace StorefrontProject.Models
         //on constructor, add some items to the cart
         public DebugShoppingCart()
         {
-            items.Add(new NetworkResources.Product { Id = 1, Name = "Product 1", Price = 10 }, 25);
-            items.Add(new NetworkResources.Product { Id = 2, Name = "Product 2", Price = 20 }, 30);
-            items.Add(new NetworkResources.Product { Id = 3, Name = "Product 3", Price = 30 }, 60);
+            items.Add(new NetworkResources.Product { Id = new Guid(), Name = "Product 1", Price = 10 }, 25);
+            items.Add(new NetworkResources.Product { Id = new Guid(), Name = "Product 2", Price = 20 }, 30);
+            items.Add(new NetworkResources.Product { Id = new Guid(), Name = "Product 3", Price = 30 }, 60);
         }
 
         public void AddItem(NetworkResources.Product product, uint quantity)

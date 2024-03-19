@@ -16,21 +16,21 @@ namespace StorefrontProject.ViewModels
 
             Order testOrder = new Order()
             {
-                Id = 1,
+                Id = new Guid(),
                 Date = DateTime.Now,
                 TotalPrice = 30.00m,
                 OrderItems = new List<OrderItem>()
                 {
                     new OrderItem()
                     {
-                        OrderId = 1,
+                        OrderId = new Guid(),
                         Name = "Product 1",
                         Quantity = 1,
                         Price = 10.00m
                     },
                     new OrderItem()
                     {
-                        OrderId = 2,
+                        OrderId = new Guid(),
                         Name = "Product 2",
                         Quantity = 2,
                         Price = 20.00m
@@ -42,21 +42,21 @@ namespace StorefrontProject.ViewModels
             //add one more test order
             testOrder = new Order()
             {
-                Id = 2,
+                Id = new Guid(),
                 Date = DateTime.Now,
                 TotalPrice = 100.00m,
                 OrderItems = new List<OrderItem>()
                 {
                     new OrderItem()
                     {
-                        OrderId = 2,
+                        OrderId = new Guid(),
                         Name = "Product 2",
                         Quantity = 2,
                         Price = 20.00m
                     },
                     new OrderItem()
                     {
-                        OrderId = 3,
+                        OrderId = new Guid(),
                         Name = "Product 3",
                         Quantity = 2,
                         Price = 30.00m

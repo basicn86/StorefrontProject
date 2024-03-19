@@ -62,28 +62,27 @@ namespace StorefrontProject.Models
             //if the API is null, return
             if (ApiService.Instance == null) return;
 
-            //convert the dictionary to a dictionary of product IDs to quantities to be interpretable by the API
-            Dictionary<int, int> orderItems = new Dictionary<int, int>();
-            decimal TotalPrice = 0;
+            //prep a new order
+            NetworkResources.Order order = new NetworkResources.Order();
 
+            order.Date = DateTime.Now;
+            order.OrderItems = new List<NetworkResources.OrderItem>();
             foreach (var item in items)
             {
-                orderItems.Add(item.Key.Id, (int)item.Value);
-                TotalPrice += item.Key.Price * item.Value;
+                order.OrderItems.Add(new NetworkResources.OrderItem
+                {
+                    Name = item.Key.Name,
+                    Price = item.Key.Price,
+                    Quantity = (int)item.Value
+                });
             }
-
-            //create a new OrderRequest
-            NetworkResources.OrderRequest orderRequest = new NetworkResources.OrderRequest
-            {
-                OrderItems = orderItems,
-                TotalPrice = TotalPrice
-            };
 
             //try to place the order
             try
             {
-                await ApiService.Instance.PlaceOrderAsync(orderRequest);
-            } catch (Exception ex)
+                await ApiService.Instance.PlaceOrderAsync(order);
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
