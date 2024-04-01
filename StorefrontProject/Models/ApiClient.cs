@@ -11,7 +11,7 @@ namespace StorefrontProject.Models
     public class ApiClient : IApiClient
     {
         //local host API URL
-        private const string API_URL = "https://atxfur7tik.execute-api.us-east-1.amazonaws.com/";
+        private const string API_URL = "http://localhost:5000/";
 
         //get products from the database
         public async Task<IEnumerable<NetworkResources.Product>> GetProductsAsync()
@@ -56,7 +56,9 @@ namespace StorefrontProject.Models
             //if the response is not successful
             if (!responseMessage.IsSuccessStatusCode)
             {
-                throw new Exception("Server: " + await responseMessage.Content.ReadAsStringAsync());
+                string responseMsg = await responseMessage.Content.ReadAsStringAsync();
+
+                throw new Exception("Server: " + responseMsg);
             }
 
             //return nothing

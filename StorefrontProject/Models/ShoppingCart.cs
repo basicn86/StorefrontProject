@@ -65,12 +65,15 @@ namespace StorefrontProject.Models
             //prep a new order
             NetworkResources.Order order = new NetworkResources.Order();
 
+            order.TotalPrice = items.Sum(i => i.Key.Price * i.Value);
+
             order.Date = DateTime.Now;
             order.OrderItems = new List<NetworkResources.OrderItem>();
             foreach (var item in items)
             {
                 order.OrderItems.Add(new NetworkResources.OrderItem
                 {
+                    Id = item.Key.Id,
                     Name = item.Key.Name,
                     Price = item.Key.Price,
                     Quantity = (int)item.Value

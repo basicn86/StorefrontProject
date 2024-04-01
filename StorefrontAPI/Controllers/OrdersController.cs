@@ -6,8 +6,84 @@ namespace StorefrontAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UpdateOrder : ControllerBase
+    public class OrdersController : ControllerBase
     {
+        [HttpGet]
+        public IActionResult Get()
+        {
+            //return the list of orders
+            return Ok(MemoryDatabase.Orders);
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(Guid id)
+        {
+            //delete the order from the database
+            int Removed = MemoryDatabase.Orders.RemoveAll(o => o.Id == id);
+
+            //if the order was removed, return 200 OK
+            if (Removed > 0)
+            {
+                return Ok();
+            }
+
+            //if the order was not removed, return 404 Not Found
+            return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] Order orderRequest)
+        {
+            //create a new order
+            var order = new NetworkResources.Order();
+            decimal TotalPrice = 0;
+
+            //for each order item in the request
+            foreach (var orderedItem in orderRequest.OrderItems)
+            {
+                //get the matching product from the list of products
+                NetworkResources.Product? product = MemoryDatabase.Products.Find(p => p.Id == orderedItem.Id);
+                //if the product is not found, return an error
+                if (product == null)
+                {
+                    return BadRequest("Product not found");
+                }
+
+                //create a new order item
+                var newOrderItem = new NetworkResources.OrderItem
+                {
+                    OrderId = product.Id,
+                    Quantity = orderedItem.Quantity,
+                    Price = product.Price,
+                    Name = product.Name
+                };
+
+                //add the order item to the order
+                order.OrderItems.Add(newOrderItem);
+
+                TotalPrice += newOrderItem.Price * newOrderItem.Quantity;
+            }
+
+            //make sure the total price matches the total price in the request
+            if (TotalPrice != orderRequest.TotalPrice)
+            {
+                return BadRequest("Total price of cart on server does not match total price on client.");
+            }
+
+            //set the total price of the order
+            order.TotalPrice = TotalPrice;
+            //assign ID equal to the number of orders in the list
+            order.Id = Guid.NewGuid();
+            //set the date of the order to right now
+            order.Date = System.DateTime.Now;
+
+            //add the order to the list of orders
+            MemoryDatabase.Orders.Add(order);
+
+            //return the order
+            return Ok(order);
+        }
+
         //PUT method to update an order
         [HttpPut]
         public IActionResult Put([FromBody] Order order)
@@ -17,7 +93,7 @@ namespace StorefrontAPI.Controllers
             if (existingOrder == null) return NotFound();
 
             //verify that the total price is not negative and that the quantity of any item is not negative
-            if(NegativeValuesExist(order)) return BadRequest("One or more values in the order were negative!");
+            if (NegativeValuesExist(order)) return BadRequest("One or more values in the order were negative!");
             RemoveZeroQuantityItems(ref order);
 
             //Find the products in the order in the database, user cannot be trusted to send the correct product information

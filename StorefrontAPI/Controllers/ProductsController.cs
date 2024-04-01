@@ -5,7 +5,7 @@ namespace StorefrontAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GetProducts : ControllerBase
+    public class ProductsController : ControllerBase
     {
         [HttpGet]
         public IActionResult Get()
