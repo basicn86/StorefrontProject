@@ -32,3 +32,6 @@ jobs:
       
     - name: Build
       run: dotnet build --configuration Release --no-restore
+
+    - name: Run Client Tests
+      run: dotnet test ClientTests.csproj --configuration Release --no-build
