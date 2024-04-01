@@ -19,7 +19,7 @@ namespace StorefrontProject.Models.Interfaces
         /// </summary>
         /// <param name="orderRequest">The order request to be placed.</param>
         /// <returns>A task that represents the asynchronous operation.</returns>
-        public Task PlaceOrderAsync(NetworkResources.OrderRequest orderRequest);
+        public Task PlaceOrderAsync(NetworkResources.Order order);
 
         //get orders
         public Task<IEnumerable<NetworkResources.Order>> GetOrdersAsync();
@@ -29,7 +29,7 @@ namespace StorefrontProject.Models.Interfaces
         /// </summary>
         /// <param name="orderId">The ID of the order to be removed.</param>
         /// <returns>A task that represents the asynchronous operation.</returns>
-        public Task RemoveOrderAsync(int orderId);
+        public Task RemoveOrderAsync(Guid orderId);
 
         public Task UpdateOrderAsync(NetworkResources.Order order);
     }

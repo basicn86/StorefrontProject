@@ -14,8 +14,8 @@ namespace StorefrontProject.ViewModels
     public class OrderViewModel : ViewModelBase
     {
         //This can be set to 0 on the client side. When placing an order, the server will assign a unique ID to the order, and disregard the client's ID.
-        public int Id { get; set; }
-        
+        public Guid Id { get; set; }
+
         //TotalPrice, it is determined by total price of all order items, calculated at runtime
         public decimal TotalPrice
         {
@@ -104,7 +104,8 @@ namespace StorefrontProject.ViewModels
                 order.OrderItems.Add(new NetworkResources.OrderItem
                 {
                     //copy the properties from the OrderItemViewModel to the OrderItem
-                    ProductId = item.ProductId,
+                    Id = item.Id,
+                    OrderId = item.OrderId,
                     Name = item.Name,
                     Quantity = item.Quantity,
                     Price = item.Price 

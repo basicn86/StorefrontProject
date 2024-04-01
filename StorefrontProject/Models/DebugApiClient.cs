@@ -25,7 +25,7 @@ namespace StorefrontProject.Models
         }
 
         //implement place order
-        public async Task PlaceOrderAsync(NetworkResources.OrderRequest orderRequest)
+        public async Task PlaceOrderAsync(NetworkResources.Order order)
         {
             //fake order placement
             await Task.Delay(1000);
@@ -36,9 +36,6 @@ namespace StorefrontProject.Models
         {
             //generate a list of fake orders for now
             List<NetworkResources.Order> orders = new List<NetworkResources.Order>();
-            orders.Add(new NetworkResources.Order { Id = 1, TotalPrice = 10.00m });
-            orders.Add(new NetworkResources.Order { Id = 2, TotalPrice = 20.00m });
-            orders.Add(new NetworkResources.Order { Id = 3, TotalPrice = 30.00m });
 
             //fake await
             await Task.Delay(100);
@@ -48,7 +45,7 @@ namespace StorefrontProject.Models
         }
 
         //placeholder for remove order
-        public async Task RemoveOrderAsync(int orderId)
+        public async Task RemoveOrderAsync(Guid orderId)
         {
             //fake order removal
             await Task.Delay(1000);

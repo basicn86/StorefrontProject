@@ -13,12 +13,14 @@ namespace StorefrontProject.ViewModels
     public class OrderItemViewModel : ViewModelBase
     {
         //product ID
-        private int id = 0;
-        public int ProductId
+        private Guid id;
+        public Guid Id
         {
             get => id;
             set => this.RaiseAndSetIfChanged(ref id, value);
         }
+
+        public Guid OrderId { get; set; }
 
         //product name
         private string name = "";
@@ -56,7 +58,8 @@ namespace StorefrontProject.ViewModels
         //constructor that takes a NetworkResources.OrderItem and sets the properties in this view model
         public OrderItemViewModel(OrderItem orderItem)
         {
-            ProductId = orderItem.ProductId;
+            Id = orderItem.Id;
+            OrderId = orderItem.OrderId;
             Name = orderItem.Name;
             Price = orderItem.Price;
             Quantity = orderItem.Quantity;
@@ -65,7 +68,8 @@ namespace StorefrontProject.ViewModels
         //constructor that allows cloning an OrderItemViewModel
         public OrderItemViewModel(OrderItemViewModel orderItem)
         {
-            ProductId = orderItem.ProductId;
+            Id = orderItem.Id;
+            OrderId = orderItem.OrderId;
             Name = orderItem.Name;
             Price = orderItem.Price;
             Quantity = orderItem.Quantity;

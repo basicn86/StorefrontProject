@@ -21,7 +21,7 @@ namespace StorefrontProject.Models
             client.Timeout = TimeSpan.FromSeconds(15);
 
             //try to get the products from the API
-            HttpResponseMessage responseMessage = await client.GetAsync(API_URL + "api/GetProducts");
+            HttpResponseMessage responseMessage = await client.GetAsync(API_URL + "api/products");
 
             //if the response is successful
             if (responseMessage.IsSuccessStatusCode)
@@ -42,7 +42,7 @@ namespace StorefrontProject.Models
         }
 
         //placeholder for placing an order
-        public async Task PlaceOrderAsync(NetworkResources.OrderRequest orderRequest)
+        public async Task PlaceOrderAsync(NetworkResources.Order order)
         {
             //new HTTP client
             HttpClient client = new HttpClient();
@@ -51,12 +51,14 @@ namespace StorefrontProject.Models
             client.Timeout = TimeSpan.FromSeconds(15);
 
             //http response
-            HttpResponseMessage responseMessage = await client.PostAsJsonAsync(API_URL + "api/PlaceOrder", orderRequest);
+            HttpResponseMessage responseMessage = await client.PostAsJsonAsync(API_URL + "api/orders", order);
 
             //if the response is not successful
             if (!responseMessage.IsSuccessStatusCode)
             {
-                throw new Exception("Server: " + await responseMessage.Content.ReadAsStringAsync());
+                string responseMsg = await responseMessage.Content.ReadAsStringAsync();
+
+                throw new Exception("Server: " + responseMsg);
             }
 
             //return nothing
@@ -72,7 +74,7 @@ namespace StorefrontProject.Models
             client.Timeout = TimeSpan.FromSeconds(15);
 
             //http response
-            HttpResponseMessage responseMessage = await client.GetAsync(API_URL + "api/GetOrders");
+            HttpResponseMessage responseMessage = await client.GetAsync(API_URL + "api/orders");
 
             //if the response is successful
             if (responseMessage.IsSuccessStatusCode)
@@ -94,7 +96,7 @@ namespace StorefrontProject.Models
         }
 
         //implement the function to remove the order
-        public async Task RemoveOrderAsync(int orderId)
+        public async Task RemoveOrderAsync(Guid orderId)
         {
             //new HTTP client
             HttpClient client = new HttpClient();
@@ -103,7 +105,7 @@ namespace StorefrontProject.Models
             client.Timeout = TimeSpan.FromSeconds(15);
 
             //http response
-            HttpResponseMessage responseMessage = await client.DeleteAsync(API_URL + "api/CancelOrder?orderId=" + orderId);
+            HttpResponseMessage responseMessage = await client.DeleteAsync(API_URL + "api/orders?id=" + orderId);
 
             //if the response is successful
             if (responseMessage.IsSuccessStatusCode)
@@ -125,7 +127,7 @@ namespace StorefrontProject.Models
             client.Timeout = TimeSpan.FromSeconds(15);
 
             //http response
-            HttpResponseMessage responseMessage = await client.PutAsJsonAsync(API_URL + "api/UpdateOrder", order);
+            HttpResponseMessage responseMessage = await client.PutAsJsonAsync(API_URL + "api/orders", order);
 
             //if the response is successful
             if (responseMessage.IsSuccessStatusCode)
