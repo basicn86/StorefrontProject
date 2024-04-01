@@ -13,7 +13,7 @@ namespace StorefrontProject.ViewModels
 {
     public class CatalogItemViewModel : ViewModelBase
     {
-        public CatalogItemViewModel(string name, decimal price, Bitmap? productImage, ReactiveCommand<Unit, Unit> notifyCartUpdate, NetworkResources.Product product)
+        public CatalogItemViewModel(string name, decimal price, Bitmap? productImage, ReactiveCommand<Unit, Unit>? notifyCartUpdate, NetworkResources.Product product)
         {
             Name = name;
             Price = price;
@@ -24,7 +24,7 @@ namespace StorefrontProject.ViewModels
             AddToCartCommand = ReactiveCommand.Create(() =>
             {
                 ShoppingCartService.Instance?.AddItem(Product, Quantity);
-                notifyCartUpdate.Execute().Subscribe();
+                notifyCartUpdate?.Execute().Subscribe();
             });
         }
         //product
