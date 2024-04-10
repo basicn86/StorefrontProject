@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StorefrontAPI", "Storefront
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkResources", "NetworkResources\NetworkResources.csproj", "{B00A406F-2E87-4CA4-88C2-30B85A9B6C75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientTests", "ClientTests\ClientTests.csproj", "{D8CAFABA-83E5-4EA4-AC8F-C3C007E9CFDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientTests", "ClientTests\ClientTests.csproj", "{D8CAFABA-83E5-4EA4-AC8F-C3C007E9CFDC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerlessAPI", "ServerlessAPI\ServerlessAPI.csproj", "{0764E26E-7728-46D9-BEE4-6157E3B15911}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +44,12 @@ Global
 		{D8CAFABA-83E5-4EA4-AC8F-C3C007E9CFDC}.DebugWithAPI|Any CPU.Build.0 = Debug|Any CPU
 		{D8CAFABA-83E5-4EA4-AC8F-C3C007E9CFDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8CAFABA-83E5-4EA4-AC8F-C3C007E9CFDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0764E26E-7728-46D9-BEE4-6157E3B15911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0764E26E-7728-46D9-BEE4-6157E3B15911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0764E26E-7728-46D9-BEE4-6157E3B15911}.DebugWithAPI|Any CPU.ActiveCfg = Debug|Any CPU
+		{0764E26E-7728-46D9-BEE4-6157E3B15911}.DebugWithAPI|Any CPU.Build.0 = Debug|Any CPU
+		{0764E26E-7728-46D9-BEE4-6157E3B15911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0764E26E-7728-46D9-BEE4-6157E3B15911}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
