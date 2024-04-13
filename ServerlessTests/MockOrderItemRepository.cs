@@ -29,10 +29,10 @@ namespace ServerlessTests
             return Task.FromResult<IList<OrderItem>>(orderItems.Where(orderItem => orderItem.OrderId == id).ToList());
         }
 
-        public Task UpdateOrderItemsAsync(IList<OrderItem> orderItems)
+        public Task UpdateOrderItemsAsync(IList<OrderItem> orderItemsToUpdate)
         {
-            this.orderItems.RemoveAll(o => o.OrderId == orderItems[0].OrderId);
-            this.orderItems.AddRange(orderItems);
+            orderItems.RemoveAll(o => o.OrderId == orderItemsToUpdate[0].OrderId);
+            orderItems.AddRange(orderItemsToUpdate);
             return Task.CompletedTask;
         }
     }
