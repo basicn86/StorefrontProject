@@ -10,7 +10,7 @@ namespace ServerlessTests
 {
     class MockOrderItemRepository : IOrderItemRepository
     {
-        public List<OrderItem> orderItems = new List<OrderItem>();
+        public static List<OrderItem> orderItems = new List<OrderItem>();
         public Task AddOrderItemsAsync(IList<OrderItem> orderItem)
         {
             orderItems.AddRange(orderItem);

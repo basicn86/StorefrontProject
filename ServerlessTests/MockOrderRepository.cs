@@ -11,7 +11,7 @@ namespace ServerlessTests
 {
     class MockOrderRepository : IOrderRepository
     {
-        public List<Order> orders = new List<Order>();
+        public static List<Order> orders = new List<Order>();
         public Task AddOrderAsync(Order order)
         {
             orders.Add(order);
