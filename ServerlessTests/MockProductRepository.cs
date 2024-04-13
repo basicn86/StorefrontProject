@@ -10,7 +10,7 @@ namespace ServerlessTests
 {
     internal class MockProductRepository : IProductRepository
     {
-        public List<Product> products = new List<Product>();
+        public static List<Product> products = new List<Product>();
         Task IProductRepository.AddProductsAsync(IList<Product> productsToAdd)
         {
             products.AddRange(productsToAdd);
