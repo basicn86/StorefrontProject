@@ -36,5 +36,5 @@ jobs:
     - name: Run Client Tests
       run: dotnet test ClientTests\ClientTests.csproj --configuration Release --no-build
 
-    - name: Run AWS SAM Servless Tests
+    - name: Run AWS SAM Serverless Tests
       run: dotnet test ServerlessTests\ServerlessTests.csproj --configuration Release --no-build
