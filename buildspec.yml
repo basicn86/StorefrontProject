@@ -29,8 +29,8 @@ phases:
             - dotnet test ServerlessTests/ServerlessTests.csproj --configuration Release --no-build
     post_build:
         commands:
-            - echo "Packaging the AWS SAM application"
-            - cd ServerlessAPI && sam package --output-template-file template.yaml --resolve-s3 nedimcodebuild2 --region us-east-1
+            - echo "Copy the entire build folder to the S3 bucket"
+            - cd ServerlessAPI && aws s3 cp ./.aws-sam/build/* s3://$BUCKET_NAME --recursive
             - cd .. #need to go back to the root directory
 
 artifacts:
