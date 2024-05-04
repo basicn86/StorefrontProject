@@ -22,13 +22,13 @@ phases:
             - echo "Build the AWS SAM application"
             - cd ServerlessAPI
             - sam build
-            - cd .. 
-    post_build:
-        commands:
+            - cd ..
             - echo "Running Client Tests"
             - dotnet test ClientTests\ClientTests.csproj --configuration Release --no-build
             - echo "Running AWS SAM Serverless Tests"
             - dotnet test ServerlessTests\ServerlessTests.csproj --configuration Release --no-build
+    post_build:
+        commands:
             - echo "Packaging the AWS SAM application"
             - cd ServerlessAPI
             - sam package --s3-bucket $BUCKET_NAME --output-template-file packaged.yaml
