@@ -24,9 +24,9 @@ phases:
             - sam build
             - cd ..
             - echo "Running Client Tests"
-            - dotnet test ClientTests/ClientTests.csproj --configuration Release
+            - dotnet test ClientTests/ClientTests.csproj --configuration Release --no-build
             - echo "Running AWS SAM Serverless Tests"
-            - dotnet test ServerlessTests/ServerlessTests.csproj --configuration Release
+            - dotnet test ServerlessTests/ServerlessTests.csproj --configuration Release --no-build
     post_build:
         commands:
             - echo "Packaging the AWS SAM application"
