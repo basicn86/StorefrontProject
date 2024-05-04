@@ -32,6 +32,7 @@ phases:
             - echo "Zipping the build"
             - cd ServerlessAPI/.aws-sam && zip -r ../build.zip build
             - echo "Copy the build.zip to the S3 bucket"
+            - ls 
             - aws s3 cp ./build.zip s3://$BUCKET_NAME/build.zip
             - cd .. #need to go back to the root directory
 
