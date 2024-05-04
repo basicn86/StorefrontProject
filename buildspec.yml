@@ -21,15 +21,26 @@ phases:
             - dotnet build --configuration Release --no-restore
             - echo "Build the AWS SAM application"
             - cd ServerlessAPI
-            - sam build 
+            - sam build
+            - cd .. 
     post_build:
-        commmands:
+        commands:
             - echo "Running Client Tests"
             - dotnet test ClientTests\ClientTests.csproj --configuration Release --no-build
             - echo "Running AWS SAM Serverless Tests"
             - dotnet test ServerlessTests\ServerlessTests.csproj --configuration Release --no-build
-            - echo "Packaging the application"
-            - dotnet lambda package --configuration Release --framework netcoreapp3.1 --output-package bin\Release\netcoreapp3.1\package.zip
-            - echo "Uploading the application to S3"
-            - aws s3 cp bin\Release\netcoreapp3.1\package.zip s3://$BUCKET_NAME/package.zip
-            - echo "Deploying the SAM application"
+            - echo "Packaging the AWS SAM application"
+            - cd ServerlessAPI
+            - sam package --s3-bucket $BUCKET_NAME --output-template-file packaged.yaml
+            - cd .. #need to go back to the root directory
+
+artifacts:
+    type: zip
+    files:
+        - packaged.yaml
+
+reports:
+    Reports:
+        files:
+            - '**/*'
+        base-directory: 'reports'
