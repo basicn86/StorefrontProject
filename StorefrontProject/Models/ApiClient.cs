@@ -11,7 +11,7 @@ namespace StorefrontProject.Models
     public class ApiClient : IApiClient
     {
         //local host API URL
-        private const string API_URL = "http://localhost:5000/";
+        private const string API_URL = "https://3m5b74gy5g.execute-api.us-east-1.amazonaws.com/";
 
         //get products from the database
         public async Task<IEnumerable<NetworkResources.Product>> GetProductsAsync()
