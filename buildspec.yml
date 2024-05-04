@@ -29,9 +29,16 @@ phases:
             - dotnet test ServerlessTests/ServerlessTests.csproj --configuration Release --no-build
     post_build:
         commands:
-            - echo "Copy the entire build folder to the S3 bucket"
-            - cd ServerlessAPI && aws s3 cp .aws-sam/build s3://${BUCKET_NAME} --recursive
-            - cd .. #need to go back to the root directory
+            - echo "Zipping the build"
+            #- cd ServerlessAPI/.aws-sam && zip -r ../build.zip build
+            #- echo "Copy the build.zip to the S3 bucket"
+            #- aws s3 cp build.zip s3://$BUCKET_NAME/build.zip
+            #- cd .. #need to go back to the root directory
+
+artifacts:
+    files:
+        - '**/*'
+    base-directory: 'ServerlessAPI/.aws-sam/build'
 
 reports:
     Reports:
