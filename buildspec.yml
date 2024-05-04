@@ -30,7 +30,7 @@ phases:
     post_build:
         commands:
             - echo "Packaging the AWS SAM application"
-            - cd ServerlessAPI && sam package --output-template-file template.yaml --resolve-s3 $BUCKET_NAME
+            - cd ServerlessAPI && sam package --output-template-file template.yaml --resolve-s3 https://nedimcodebuild.s3.amazonaws.com/
             - cd .. #need to go back to the root directory
 
 artifacts:
