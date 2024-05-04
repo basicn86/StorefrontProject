@@ -20,6 +20,7 @@ phases:
             - echo "Building the project"
             - dotnet build --configuration Release --no-restore
             - echo "Build the AWS SAM application"
+            - cd ServerlessAPI
             - sam build 
     post_build:
         commmands:
