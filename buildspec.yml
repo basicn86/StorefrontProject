@@ -14,23 +14,23 @@ phases:
     pre_build:
         commands:
             - echo "Restoring dependencies"
-            #- dotnet restore
+            - dotnet restore
     build:
         commands:
             - echo "Building the project"
-            #- dotnet build --configuration Release --no-restore
+            - dotnet build --configuration Release --no-restore
             - echo "Build the AWS SAM application"
             - cd ServerlessAPI
             - sam build
             - cd ..
             - echo "Running Client Tests"
-            #- dotnet test ClientTests/ClientTests.csproj --configuration Release --no-build
+            - dotnet test ClientTests/ClientTests.csproj --configuration Release --no-build
             - echo "Running AWS SAM Serverless Tests"
-            #- dotnet test ServerlessTests/ServerlessTests.csproj --configuration Release --no-build
+            - dotnet test ServerlessTests/ServerlessTests.csproj --configuration Release --no-build
     post_build:
         commands:
             - echo "Zipping the build"
-            #  - cd ServerlessAPI/.aws-sam/build && zip -r ../build.zip * && aws s3 cp ../build.zip s3://nedimcodebuild3/build.zip
+            - cd ServerlessAPI/.aws-sam/build && zip -r ../build.zip * && aws s3 cp ../build.zip s3://nedimcodebuild3/build.zip
 
 artifacts:
     files:
