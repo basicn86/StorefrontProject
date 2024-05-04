@@ -14,7 +14,7 @@ phases:
     pre_build:
         commands:
             - echo "Restoring dependencies"
-            - dotnet restore
+            #- dotnet restore
     build:
         commands:
             - echo "Building the project"
