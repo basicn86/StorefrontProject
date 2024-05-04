@@ -30,7 +30,12 @@ phases:
     post_build:
         commands:
             - echo "Zipping the build"
-            - cd ServerlessAPI/.aws-sam/build && zip -r ../build.zip * && aws s3 cp ../build.zip s3://nedimcodebuild3/build.zip
+            #- cd ServerlessAPI/.aws-sam/build && zip -r ../build.zip * && aws s3 cp ../build.zip s3://nedimcodebuild3/build.zip
+
+artifacts:
+    files:
+        - '**/*'
+    base-directory: 'ServerlessAPI/.aws-sam/build'
 
 reports:
     Reports:
