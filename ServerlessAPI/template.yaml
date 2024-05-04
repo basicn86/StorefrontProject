@@ -17,7 +17,7 @@ Resources:
       Handler: ServerlessAPI
       Runtime: dotnet8
       MemorySize: 256
-      Role: service_role_cloudformation
+      Role: arn:aws:iam::123725129624:role/labs/service_role_cloudformation
       Policies:
         # Give Create/Read/Update/Delete Permissions to the SampleTable
         - DynamoDBCrudPolicy:
