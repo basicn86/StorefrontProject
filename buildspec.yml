@@ -30,7 +30,7 @@ phases:
     post_build:
         commands:
             - echo "Packaging the AWS SAM application"
-            - cd ServerlessAPI && sam package --output-template-file template.yaml --resolve-s3 nedimcodebuild --region us-east-1
+            - cd ServerlessAPI && sam package --output-template-file template.yaml --resolve-s3 nedimcodebuild2 --region us-east-1
             - cd .. #need to go back to the root directory
 
 artifacts:
