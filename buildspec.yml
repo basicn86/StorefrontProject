@@ -31,13 +31,13 @@ phases:
         commands:
             - echo "Packaging the AWS SAM application"
             - cd ServerlessAPI
-            - sam package --s3-bucket $BUCKET_NAME --output-template-file packaged.yaml
+            - sam package --output-template-file template.yaml --s3-bucket $BUCKET_NAME
             - cd .. #need to go back to the root directory
 
 artifacts:
     type: zip
     files:
-        - packaged.yaml
+        - template.yaml
 
 reports:
     Reports:
