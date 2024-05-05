@@ -27,15 +27,18 @@ phases:
             - dotnet test ClientTests/ClientTests.csproj --configuration Release --no-build
             - echo "Running AWS SAM Serverless Tests"
             - dotnet test ServerlessTests/ServerlessTests.csproj --configuration Release --no-build
-    #post_build:
-        #commands:
-            #- echo "Zipping the build"
-            #- cd ServerlessAPI/.aws-sam/build && zip -r ../build.zip * && aws s3 cp ../build.zip s3://nedimcodebuild3/build.zip
+    post_build:
+        commands:
+            - echo "Zipping the build"
+            - cd ServerlessAPI
+            - sam package --output-template-file template.yaml --s3-bucket nedimcodebuild
+            - echo ls
+            - cd .. 
 
 artifacts:
+    type: zip
     files:
-        - '**/*'
-    base-directory: 'ServerlessAPI/.aws-sam/build'
+        - 'ServerlessAPI/template.yaml'
 
 reports:
     Reports:
