@@ -17,6 +17,17 @@ namespace ServerlessAPI.Repositories
 
         public async Task<IList<Product>> GetProductsAsync(int limit = 10)
         {
+            //return a set of test products for testing
+            return new List<Product>
+            {
+                new Product { Id = Guid.NewGuid(), Name = "Product 1", Price = 10.0m },
+                new Product { Id = Guid.NewGuid(), Name = "Product 2", Price = 20.0m },
+                new Product { Id = Guid.NewGuid(), Name = "Product 3", Price = 30.0m },
+                new Product { Id = Guid.NewGuid(), Name = "Product 4", Price = 40.0m },
+                new Product { Id = Guid.NewGuid(), Name = "Product 5", Price = 50.0m }
+            };
+
+            //its okay that this is unreachable code, as we are just testing the API
             var result = new List<Product>();
 
             try
