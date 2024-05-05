@@ -31,7 +31,7 @@ phases:
         commands:
             - echo "Zipping the build"
             - cd ServerlessAPI
-            - sam package --output-template-file template.yaml --s3-bucket nedimcodebuild
+            - sam package --output-template-file template.yaml --s3-bucket $BUCKET_NAME
             - echo ls
             - cd .. 
 
